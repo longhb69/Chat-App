@@ -1,0 +1,141 @@
+import { useEffect, useState } from "react";
+import embedRegexes from "../utils/embedRegexes ";
+import LinkRender from "./LinkRender";
+import AttachmentRender from "./AttachmentRender";
+
+export default function Message({ message, premessage }, idx) {
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const timezoneOffset = new Date().getTimezoneOffset()
+    var date = new Date(message.timestamp);
+    var prevmdate = new Date(premessage.timestamp);
+    const [link, setLink] = useState(false)
+    const [type, setType] = useState('')
+
+    useEffect(() => {
+        if (!message.newmsg) {
+            date.setMinutes(date.getMinutes() - timezoneOffset);
+            prevmdate.setMinutes(prevmdate.getMinutes() - timezoneOffset);
+        } else {
+            if (!premessage.newmsg) prevmdate.setMinutes(prevmdate.getMinutes() - timezoneOffset);
+        }
+        embedRegexes.some(({ regex, type }) => {
+            const match = message.content.match(regex)
+            if (match) {
+                setLink(true);
+                setType(type);
+                return true;
+            }
+            return false
+        })
+    }, [])
+
+    const isTenMinuteGap = () => {
+        let tenMinuteGap = false;
+        if (prevmdate.getFullYear() === date.getFullYear() && prevmdate.getMonth() === date.getMonth() && prevmdate.getDate() === date.getDate()) {
+            if (date.getHours() === prevmdate.getHours()) {
+                if (date.getMinutes() - prevmdate.getMinutes() <= 10) {
+                    tenMinuteGap = true
+                }
+            }
+            else if (date.getHours() === prevmdate.getHours() + 1) {
+                const gap = date.getMinutes() - prevmdate.getMinutes();
+                if (gap <= -50) {
+                    tenMinuteGap = true;
+                }
+            }
+        }
+        return tenMinuteGap;
+    }
+    const isDayGap = () => {
+        let dayGap = false;
+        if (prevmdate.getDate() < date.getDate() || idx === 0)
+            dayGap = true
+
+        return dayGap
+    };
+
+    const formatTimestamp = () => {
+        var formattedDate = '';
+        if (!isTenMinuteGap()) {
+            if (date.getDate() === today.getDate() &&
+                date.getMonth() === today.getMonth() &&
+                date.getFullYear() === today.getFullYear()) {
+                formattedDate = `Hôm nay lúc ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
+            } else if (date.getDate() === yesterday.getDate() &&
+                date.getMonth() === yesterday.getMonth() &&
+                date.getFullYear() === yesterday.getFullYear()) {
+                formattedDate = `Hôm qua lúc ${date.getHours()}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`;
+            }
+            else {
+                formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
+            }
+        } else {
+            formattedDate = `${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
+        }
+        return formattedDate;
+    };
+    return (
+        <>
+            {isDayGap() && (
+                <div className="divider divider-2">
+                    <span className="day-gap-divider bg-white">
+                        {`${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}`}
+                    </span>
+                </div>
+            )}
+            <li id={message.id}>
+                {isTenMinuteGap() ? (
+                    <div className="message mt-0 relative min-h-[1.375rem] py-[1px] px-[70px] hover:bg-[#F7F7F7]">
+                        <div className="static ml-0 pl-0 indent-0">
+                            <span className="message-time absolute left-0 w-[56px] leading-5 h-[1.375rem] user-select-none text-right text-xs mr-1">
+                                <time>{formatTimestamp()}</time>
+                            </span>
+                            <div className="leading-5">
+                                {link
+                                    ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
+                                    : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
+                            </div>
+                            {link
+                                ? <LinkRender link={message.content} type={type} />
+                                : null}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="mt-4 min-h-[2.75rem] py-[1px] px-[70px] align-baseline hover:bg-[#F7F7F7]">
+                        <div className="static">
+                            <img
+                                className="avatar w-[40px] h-[40px] absolute left-[16px] rounded-[50%] bg-[#5865F2] overflow-hidden cursor-pointer select-none"
+                                alt=""
+                            />
+                            <h3 className="overflow-hidden relative leading-5 text-base mb-0">
+                                <span>
+                                    <span className="font-bold leading-5 overflow-hidden align-baseline">
+                                        {message.username}
+                                    </span>
+                                    <span className="text-xs font-medium ml-2 leading-5 align-baseline">
+                                        <time>{formatTimestamp()}</time>
+                                    </span>
+                                </span>
+                            </h3>
+                            <div className="indent-0 leading-5">
+                                {link
+                                    ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
+                                    : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
+                            </div>
+                            {link
+                                ? <LinkRender link={message.content} type={type} />
+                                : null}
+                            {message.attachments && message.attachments.length > 0
+                                ?
+                                <AttachmentRender attachments={message.attachments} />
+                                : null}
+                        </div>
+
+                    </div>
+                )}
+            </li>
+        </>
+    );
+}
