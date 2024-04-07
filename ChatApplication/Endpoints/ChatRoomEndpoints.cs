@@ -35,7 +35,7 @@ public static class ChatRoomEndpoints
             ChatRoom new_chatroom = new()
             {
                 Name = chatroomDto.Name,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 IsPrivate = false,
                 ImageUrl = chatroomDto.ImageUrl,
                 OwnerId = chatroomDto.OwnerId,
@@ -45,22 +45,22 @@ public static class ChatRoomEndpoints
             return Results.CreatedAtRoute(GetChatRoomEndpointName, new { chatRoomId = createdChatRoom.Id }, createdChatRoom);
         }).RequireAuthorization();
 
-        endpoints.MapDelete("api/chatroom/{chatRoomId}", async (HttpContext context,IChatRoomRepository chatRoomRepository, long chatRoomId) =>
+        endpoints.MapDelete("api/chatroom/{chatRoomId}", async (HttpContext context, IChatRoomRepository chatRoomRepository, long chatRoomId) =>
         {
-            
+
             var result = await chatRoomRepository.DeleteAsync(chatRoomId);
-            if(result.StatusCode == StatusCodes.Status404NotFound) 
+            if (result.StatusCode == StatusCodes.Status404NotFound)
             {
                 return Results.StatusCode(StatusCodes.Status404NotFound);
             }
-            else if(result.StatusCode == StatusCodes.Status401Unauthorized) 
+            else if (result.StatusCode == StatusCodes.Status401Unauthorized)
             {
                 return Results.StatusCode(StatusCodes.Status401Unauthorized);
             }
             else
             {
                 return Results.StatusCode(StatusCodes.Status204NoContent);
-            }           
+            }
         }).RequireAuthorization();
     }
 }

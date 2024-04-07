@@ -1,23 +1,20 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { createEditor, Editor, Element, Text, Node, Range, Transforms } from "slate";
-import { Slate, Editable, withReact, ReactEditor } from "slate-react";
+import React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createEditor, Transforms } from "slate";
+import { Slate, Editable, withReact } from "slate-react";
 import findUrlsInText from "../utils/findUrlsInText";
+import AttachmentItem from "./AttachmentItem";
 
-export default function SendMessageForm({ sendMessage }) {
-    const initialValue = [
-        {
-            type: 'paragraph',
-            children: [{ text: '' }],
-        },
-    ]
-
-    const [messages, setMessage] = useState([]);
+export default function SendMessageForm({ setMessages, sendMessage, chatRoomId, conn }) {
+    const [input, setInput] = useState([]);
+    const [attachList, setAttachList] = useState([]);
     const textAreaRef = useRef()
     const [editor] = useState(() => withReact(createEditor()))
+    const inputRef = useRef(null);
 
     useEffect(() => {
-        textAreaRef.current.style.height = (messages.length + 1) * 22 + 'px';
-    }, [messages])
+        textAreaRef.current.style.height = (input.length + 1) * 22 + 'px';
+    }, [input])
 
     const embedRegexes = [
         {
@@ -29,6 +26,13 @@ export default function SendMessageForm({ sendMessage }) {
             //https://youtu.be/QdBZY2fkU-0?si=8vqK3bmvMaJPzx5S
             regex: /https:\/\/youtu\.be\/([\w-]+)/,
             type: 'youtube'
+        },
+    ]
+
+    const initialValue = [
+        {
+            type: 'paragraph',
+            children: [{ text: '' }],
         },
     ]
 
@@ -70,7 +74,7 @@ export default function SendMessageForm({ sendMessage }) {
     }
 
     const handleChange = messages => {
-        setMessage(messages);
+        setInput(messages);
     }
     const setEmpty = () => {
         const point = { path: [0, 0], offset: 0 }
@@ -81,17 +85,38 @@ export default function SendMessageForm({ sendMessage }) {
             children: [{ text: "" }],
         }];
     }
-    const handleKeyDown = event => {
+    const handleKeyDown = async event => {
         if (event.key === 'Enter') {
             if (!event.shiftKey) {
                 event.preventDefault();
-                const msg = messages.map(m => m.children[0].text + '\n').join('')
-                sendMessage(msg)
-                setMessage(initialValue);
+                setInput(initialValue);
                 setEmpty();
+                const msg = input.map(m => m.children[0].text + '\n').join('')
+                if (attachList.length > 0) {
+                    setAttachList([])
+                    const { messageId, uploadResults } = await sendMessage(msg, attachList)
+                    let attachments = []
+                    uploadResults.forEach(upload => {
+                        if(upload.status === 'fulfilled') {
+                            attachments.push(upload.value.data.attachemnt)
+                            conn.invoke("NotifyAttachment", chatRoomId, messageId)
+                        }
+                    })
+                    setMessages(prevMessages => {
+                        return prevMessages.map(message => {
+                            if (message.id === messageId) {
+                                return { ...message, attachments: attachments};
+                            }
+                            return message;
+                        });
+                    });
+                } else {
+                    await sendMessage(msg)
+                }
             }
         }
     }
+
 
     const myDecorator = ([node, path]) => {
         const nodeText = node.text;
@@ -135,11 +160,59 @@ export default function SendMessageForm({ sendMessage }) {
                 return <DefaultElement {...props} />
         }
     }, [])
+
+    const handleAddAttachmnet = () => {
+        inputRef.current.click();
+    }
+
+    const handleAttachmentChange = (event) => {
+        const files = event.target.files
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+        if (files) {
+            const filesArray = Array.from(files)
+            filesArray.forEach((file) => {
+                const fileName = file.name.toLowerCase()
+                const extension = fileName.substring(fileName.lastIndexOf('.') + 1)
+                const isImageByExtension = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)
+
+                const isImageByType = allowedTypes.includes(file.type)
+
+                if (isImageByExtension || isImageByType) {
+                    setAttachList(preFile => [...preFile, file])
+                }
+            })
+        }
+    }
+    const deleteFile = (id) => {
+        setAttachList(preAttachList => preAttachList.filter((item, idx) => idx !== id))
+    }
     return (
         <form className="relative px-[16px] shrink-0">
             <div className="bg-[#EBEDEF] relative w-full mb-[24px] rounded-lg indent-0">
                 <div className="overflow-x-hidden overflow-y-scroll max-h-[50vh] rounded-lg scrollbarContainer">
+                    {attachList.length > 0 && attachList ?
+                        <>
+                            <ul className="flex gap-[24px] margin top-0 right-0 bottom-[2px] left-[6px] pt-[20px] px-[10px] pb-[10px] overflow-x-auto list-none">
+                                {attachList.map((file, idx) => {
+                                    return (
+                                        <React.Fragment key={idx}>
+                                            <AttachmentItem file={file} deleteFile={() => deleteFile(idx)} />
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </ul>
+                            <div className="divider divider-primary m-0 h-0"></div>
+                        </>
+                        : null}
                     <div className="flex relative">
+                        <div className="attachWrapper">
+                            <button type="button" className="attachButton" onClick={() => handleAddAttachmnet()}>
+                                <input ref={inputRef} type="file" accept='image/*' id="myfile" name="myfile" className='hidden' onChange={handleAttachmentChange} multiple />
+                                <div className="h-[25px] w-[25px] p-1 bg-[#7CFFEC] rounded-full">
+                                    <div className="w-full h-full attachButon_inner" style={{ backgroundImage: `url(https://res.cloudinary.com/dfo61m8dy/image/upload/v1711545774/plus_heljrn.png)`, backgroundSize: 'cover' }}></div>
+                                </div>
+                            </button>
+                        </div>
                         <div ref={textAreaRef} className="font-medium textArea">
                             <div>
                                 <Slate editor={editor} initialValue={initialValue} onChange={handleChange}>

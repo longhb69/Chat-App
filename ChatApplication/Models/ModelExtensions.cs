@@ -51,4 +51,16 @@ public static class ModelExtensions
             PhoneNumber = user.PhoneNumber,
         };
     }
+    public static AttachemntDto AsDto(this Attachment attachment)
+    {
+        return new AttachemntDto
+        {
+            Id = attachment.Id,
+            Name = attachment.Name,
+            FileType = attachment.FileType, 
+            Width = attachment.Width,   
+            Height = attachment.Height,
+            Url = attachment.Url,
+        };
+    }
 }

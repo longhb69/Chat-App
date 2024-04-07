@@ -17,7 +17,7 @@ public class ChatApplicationContext : IdentityDbContext<User>
         public ChatApplicationContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ChatApplicationContext>();
-            optionsBuilder.UseSqlServer("Server=DESKTOP-OFPP3MK;Database=ChatApplication;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseNpgsql("Host=localhost; Database=ChatApplication; Username=postgres; Password=123");
 
             return new ChatApplicationContext(optionsBuilder.Options);
         }

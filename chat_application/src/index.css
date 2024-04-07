@@ -4,7 +4,8 @@
 
 html,
 body {
-    height: 100%
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 h3 {
@@ -92,7 +93,7 @@ form {
     display: none;
 }
 
-.loading>.lottie {
+.loading-image>.lottie {
     display: flex;
 }
 
@@ -225,7 +226,7 @@ form {
     overflow: hidden;
 }
 
-.chat {
+.chat-1 {
     min-width: 0;
     min-height: 0;
     display: flex;
@@ -271,6 +272,9 @@ form {
     justify-content: flex-end;
     align-items: stretch;
     min-height: 100%;
+    scrollbar-color: #DBDEE1 #F2F3F5;
+    overflow-anchor: none;
+
 }
 
 .layers {
@@ -305,7 +309,7 @@ form {
     display: block;
 }
 
-.divider {
+.custom-divider {
     z-index: 1;
     border-top: thin solid #E1E2E4;
     display: flex;
@@ -507,7 +511,6 @@ form {
     display: block;
     max-height: inherit;
     margin: auto;
-    width: 550px;
     height: 100%;
     cursor: pointer;
     user-select: text;
@@ -576,6 +579,7 @@ form {
     right: 0;
     pointer-events: none;
     z-index: 1002;
+    overflow: hidden;
 }
 
 .backdrop {
@@ -585,6 +589,7 @@ form {
     bottom: 0;
     left: 0;
     transform: translateZ(0);
+    pointer-events: auto;
 }
 
 .layer_ad {
@@ -600,6 +605,7 @@ form {
     min-height: 0;
     padding-top: 40px;
     padding-bottom: 40px;
+    pointer-events: none;
 }
 
 .modal_image {
@@ -632,4 +638,107 @@ form {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+.carouselModal {
+    width: 100vw;
+    height: 100vh;
+}
+
+.modalCarouselWrapper {
+    align-items: center !important;
+}
+
+.attachWrapper {
+    position: sticky;
+    flex: 0 0 auto;
+    align-self: stretch;
+}
+
+.attachButton {
+    cursor: pointer;
+    height: 44px;
+    padding: 10px 16px;
+    position: sticky;
+    top: 0;
+    background-size: cover;
+}
+
+.attachWrapper:hover .attachButon_inner {
+    animation: attach-btn-hover 1s ease-in-out infinite;
+}
+
+@keyframes attach-btn-hover {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.7);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tooltip-wrapper {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px hsla(240, calc(1 * 7.7%), 2.5%, 0.08);
+    display: grid;
+    grid-auto-flow: column;
+    box-sizing: border-box;
+    height: 32px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: flex-start;
+    user-select: none;
+    transition: box-shadow .1s ease-out;
+    position: relative;
+}
+
+.action-bar {
+    transform: translate(35%, -35%);
+}
+
+.right {
+    transform: rotate(90deg);
+}
+
+.left {
+    transform: rotate(270deg);
+}
+
+.arrowContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: all;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    line-height: 0;
+    cursor: pointer;
+    font-size: 0;
+}
+
+.click {
+    animation: click 50ms linear forwards;
+}
+
+@keyframes click {
+    0% {
+        transform: translateY(-21px);
+    }
+}
+
+.blur-load {
+    background-size: cover;
+}
+.blur-load.loaded > img {
+    opacity: 1;
+}
+.blur-load > img {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
 }

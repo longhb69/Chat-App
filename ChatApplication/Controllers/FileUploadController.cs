@@ -3,11 +3,14 @@ using ChatApplication.Data;
 using ChatApplication.Models;
 using ChatApplication.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Net;
 using System.Net.WebSockets;
+
 
 namespace ChatApplication.Controllers;
 
@@ -32,7 +35,7 @@ public class FileUploadController : Controller
     }
 
     [HttpPost]
-    [Route("attachment/upload")]
+    [Route("attachment/upload/{messageId}")]
     public async Task<IActionResult> UploadFile(IFormFile file, long messageId)
     {
         await using var memoryStream = new MemoryStream();
@@ -40,11 +43,20 @@ public class FileUploadController : Controller
 
         int width = 0;
         int height = 0;
-        using (var image = Image.FromStream(memoryStream))
+
+        if(IsImage(file.FileName))
         {
-           width = image.Width;
-           height = image.Height;
+            using (var image = Image.FromStream(memoryStream))
+            {
+                width = image.Width;
+                height = image.Height;
+            }
         }
+        if(IsVideo(file.FileName))
+        {
+            
+        };
+        
 
         string bucketName = _config["AwsConfiguration:BucketName"];
         var fileExtension = Path.GetExtension(file.FileName);
@@ -64,7 +76,7 @@ public class FileUploadController : Controller
             var attachResult = await _messageRepository.AddAttachmentAysnc(messageId, fileExtension, objectUrl, objName, width, height);
             if(attachResult.StatusCode == StatusCodes.Status200OK)
             {
-                return Ok(result);
+                return Ok(attachResult);
             }
             else
             {
@@ -75,7 +87,7 @@ public class FileUploadController : Controller
     }
 
     [HttpGet]
-    [Route("attachment/dowload")]
+    [Route("attachment/download")]
     public async Task<IActionResult> DownloadFile(string fileName, int? width, int? height)
     {
         try
@@ -94,27 +106,40 @@ public class FileUploadController : Controller
                 case ".gif":
                     contentType = "image/gif";
                     break;
+                case ".mp4":
+                    contentType = "video/mp4";
+                    break;
                 default:
                     contentType = "application/octet-stream"; 
                     break;
             }
-            if(width.HasValue && height.HasValue)
+            
+            if(IsImage(fileName))
             {
-                int thumnailWidth = width.Value;
-                int thumnailHeight = height.Value;
-                var resize = await _thumbnailGenerator.GenerateThumbnail(fileStream, thumnailWidth, thumnailHeight, Path.GetExtension(fileName));
-                return File(resize, contentType);
+                if (width.HasValue && height.HasValue)
+                {
+                    int thumnailWidth = width.Value;
+                    int thumnailHeight = height.Value;
+                    var resize = await _thumbnailGenerator.GenerateThumbnail(fileStream, thumnailWidth, thumnailHeight, Path.GetExtension(fileName));
+                    return File(resize, contentType);
+                }
+                else if (width.HasValue)
+                {
+                    int thumnailWidth = width.Value;
+                    var resize = await _thumbnailGenerator.GenerateThumbnail(fileStream, thumnailWidth, 0, Path.GetExtension(fileName));
+                    return File(resize, contentType);
+                }
+                else
+                {
+                    return File(fileStream, contentType);
+                }
             }
-            else if(width.HasValue)
+            else if(IsVideo(fileName))
             {
-                int thumnailWidth = width.Value;
-                var resize = await _thumbnailGenerator.GenerateThumbnail(fileStream, thumnailWidth, 0, Path.GetExtension(fileName));
-                return File(resize, contentType);
+                var thumbnail = await _thumbnailGenerator.GenerateVideoThumbnail(fileStream, 500, 0);
+                return File(thumbnail, "video/mp4");
             }
-            else
-            {
-                return File(fileStream, contentType);
-            }
+            return new EmptyResult();
         }
         catch (FileNotFoundException)
         {
@@ -124,5 +149,18 @@ public class FileUploadController : Controller
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
+    }
+
+    private bool IsImage(string fileName)
+    {
+        string[] imageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
+        string extension = Path.GetExtension(fileName).ToLower();
+        return imageExtensions.Contains(extension);
+    }
+    private bool IsVideo(string fileName)
+    {
+        string[] videoExtensions = { ".mp4" };
+        string extension = Path.GetExtension(fileName).ToLower();
+        return videoExtensions.Contains(extension);
     }
 }

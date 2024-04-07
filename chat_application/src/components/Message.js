@@ -9,31 +9,31 @@ export default function Message({ message, premessage }, idx) {
     yesterday.setDate(yesterday.getDate() - 1);
     const timezoneOffset = new Date().getTimezoneOffset()
     var date = new Date(message.timestamp);
-    var prevmdate = new Date(premessage.timestamp);
+    var prevmdate = premessage === null ? null : new Date(premessage.timestamp);
     const [link, setLink] = useState(false)
     const [type, setType] = useState('')
 
     useEffect(() => {
-        if (!message.newmsg) {
+        if (prevmdate !== null && !message.newmsg) {
             date.setMinutes(date.getMinutes() - timezoneOffset);
             prevmdate.setMinutes(prevmdate.getMinutes() - timezoneOffset);
         } else {
-            if (!premessage.newmsg) prevmdate.setMinutes(prevmdate.getMinutes() - timezoneOffset);
+            if (prevmdate !== null && !premessage.newmsg) prevmdate.setMinutes(prevmdate.getMinutes() - timezoneOffset);
         }
-        embedRegexes.some(({ regex, type }) => {
-            const match = message.content.match(regex)
-            if (match) {
-                setLink(true);
-                setType(type);
-                return true;
-            }
-            return false
-        })
+        // embedRegexes.some(({ regex, type }) => {
+        //     const match = message.content.match(regex)   errorr?
+        //     if (match) {
+        //         setLink(true);
+        //         setType(type);
+        //         return true;
+        //     }
+        //     return false
+        // })
     }, [])
 
     const isTenMinuteGap = () => {
         let tenMinuteGap = false;
-        if (prevmdate.getFullYear() === date.getFullYear() && prevmdate.getMonth() === date.getMonth() && prevmdate.getDate() === date.getDate()) {
+        if (prevmdate !== null && prevmdate.getFullYear() === date.getFullYear() && prevmdate.getMonth() === date.getMonth() && prevmdate.getDate() === date.getDate()) {
             if (date.getHours() === prevmdate.getHours()) {
                 if (date.getMinutes() - prevmdate.getMinutes() <= 10) {
                     tenMinuteGap = true
@@ -50,7 +50,7 @@ export default function Message({ message, premessage }, idx) {
     }
     const isDayGap = () => {
         let dayGap = false;
-        if (prevmdate.getDate() < date.getDate() || idx === 0)
+        if (prevmdate !== null && (prevmdate.getDate() < date.getDate() || idx === 0))
             dayGap = true
 
         return dayGap
@@ -79,7 +79,7 @@ export default function Message({ message, premessage }, idx) {
     return (
         <>
             {isDayGap() && (
-                <div className="divider divider-2">
+                <div className="custom-divider divider-2">
                     <span className="day-gap-divider bg-white">
                         {`${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}`}
                     </span>
@@ -92,23 +92,34 @@ export default function Message({ message, premessage }, idx) {
                             <span className="message-time absolute left-0 w-[56px] leading-5 h-[1.375rem] user-select-none text-right text-xs mr-1">
                                 <time>{formatTimestamp()}</time>
                             </span>
-                            <div className="leading-5">
-                                {link
-                                    ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
-                                    : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
-                            </div>
+                            {message.content.length > 1 ?
+                                <div className="leading-5">
+                                    {link
+                                        ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
+                                        : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
+                                </div>
+                                : null}
                             {link
                                 ? <LinkRender link={message.content} type={type} />
+                                : null}
+                            {message.attachments && message.attachments.length > 0
+                                ?
+                                <AttachmentRender attachments={message.attachments} />
                                 : null}
                         </div>
                     </div>
                 ) : (
                     <div className="mt-4 min-h-[2.75rem] py-[1px] px-[70px] align-baseline hover:bg-[#F7F7F7]">
                         <div className="static">
-                            <img
+                            {/* <img
                                 className="avatar w-[40px] h-[40px] absolute left-[16px] rounded-[50%] bg-[#5865F2] overflow-hidden cursor-pointer select-none"
                                 alt=""
-                            />
+                            /> */}
+                            <div className="avatar online absolute left-[16px]">
+                                <div className="w-[40px] h-[40px] rounded-full">
+                                    <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                </div>
+                            </div>
                             <h3 className="overflow-hidden relative leading-5 text-base mb-0">
                                 <span>
                                     <span className="font-bold leading-5 overflow-hidden align-baseline">
@@ -119,11 +130,13 @@ export default function Message({ message, premessage }, idx) {
                                     </span>
                                 </span>
                             </h3>
-                            <div className="indent-0 leading-5">
-                                {link
-                                    ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
-                                    : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
-                            </div>
+                            {true ? //message.content.length > 1 ?
+                                <div className="indent-0 leading-5">
+                                    {link
+                                        ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
+                                        : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
+                                </div>
+                                : null}
                             {link
                                 ? <LinkRender link={message.content} type={type} />
                                 : null}

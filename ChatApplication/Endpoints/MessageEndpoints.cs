@@ -20,5 +20,18 @@ public static class MessageEndpoints
                 return Results.Ok(result.Messages);
             }
         }).RequireAuthorization();
+
+        endpoins.MapGet("api/message/{messageId}", async (long messageId, IMessageRepository messageRepository) =>
+        {
+            var result = await messageRepository.GetByIdAysnc(messageId);
+            if(result.StatusCode == StatusCodes.Status200OK) {
+                return Results.Ok(result.MessageDto);
+            }
+            else
+            {
+                return Results.StatusCode(result.StatusCode);
+            }
+        });
     } 
+
 }

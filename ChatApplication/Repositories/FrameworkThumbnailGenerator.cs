@@ -1,9 +1,11 @@
-﻿using SixLabors.ImageSharp;
+﻿using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Processing;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace ChatApplication.Repositories;
@@ -69,5 +71,33 @@ public class FrameworkThumbnailGenerator : IThumbnailGenerator
             output.Position = 0;
             return output;
         }
+    }
+    public async Task<Stream> GenerateVideoThumbnail(Stream fileStream, int targetWidth, int targetHeight)
+    {
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "ffmpeg",
+                Arguments = $"-i pipe: -vf scale=550:350,setsar=1 output.mp4",
+                UseShellExecute = false,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        //MemoryStream imageStream = new MemoryStream();
+        //using (var outputStream = process.StandardOutput.BaseStream)
+        //{
+        //    outputStream.CopyTo(imageStream);
+        //}
+        Console.WriteLine("Start");
+        process.WaitForExit();
+        process.Close();
+        Console.WriteLine("Done");
+        //imageStream.Seek(0, SeekOrigin.Begin);
+        return fileStream;
     }
 }

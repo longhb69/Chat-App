@@ -1,27 +1,23 @@
-import React from "react";
-import SendMessageForm from "./SendMessageForm";
+import React, { useRef } from "react";
 import { Button } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
 import { BaseUrl } from "../shared";
 import axios from "axios";
 import { useLogin } from "../LoginContext";
-import Message from "./Message";
+import MessageContainer from "./MessageContainer";
 
 
-export default function ChatRoom({ conn, messages, sendMessage, closeConnection, users, roomName, currentRoomId }) {
+export default function ChatRoom({ conn, messages, setMessages, sendMessage, closeConnection, users, roomName, currentRoomId }) {
     const [show, setShow] = useState(false);
     const [query, setQuery] = useState('');
     const [result, setResult] = useState();
     const [authInfo, setAuthInfo] = useLogin();
-    const today = new Date();
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const timezoneOffset = new Date().getTimezoneOffset()
 
     const handleInputChange = debounce((event) => {
         setQuery(event.target.value);
     });
+
     function debounce(cb, delay = 1000) {
         let timeout;
         return (...args) => {
@@ -31,11 +27,14 @@ export default function ChatRoom({ conn, messages, sendMessage, closeConnection,
             }, delay)
         }
     }
+
     useEffect(() => {
         if (query.trim() !== "") {
             fetchData();
         }
     }, [query])
+
+
     const fetchData = async () => {
         const url = BaseUrl + `api/user_by_name/${query}`;
         try {
@@ -64,39 +63,17 @@ export default function ChatRoom({ conn, messages, sendMessage, closeConnection,
             }
         });
     }
-    const messagesWithPrevious = messages.reduce((acc, message, idx) => {
-        const premessage = messages[(idx - 1 + messages.length) % messages.length]
-        acc.push({ message, premessage })
-        return acc
-    }, [])
-
     return (
         <div className="flex flex-col overflow-hidden relative grow">
             <div className="content">
                 <div className="sidebar bg-[#F2F3F5] z-[1]">
                     <div>
                         <div>
-                            <Button variant="info" onClick={handleShow}>Add Friends</Button>
+                            <button className="btn btn-primary">Primary</button>
                         </div>
                     </div>
                 </div>
-                <div className="chat">
-                    <div className="chat-contet">
-                        <main className="chat-content2 bg-[#fff]">
-                            <div className="messages-wrapper">
-                                <div className="scroller-content absolute top-0 left-0 bottom-0 right-0 scrollerBase overflow-y-scroll">
-                                    <ol className="min-h-[0px] list-none p-0">
-                                        {messagesWithPrevious.map(({ message, premessage }, idx) => (
-                                            <Message key={message.id} message={message} premessage={premessage} />
-                                        ))}
-                                        <div className="h-[30px] w-[1px] pointer-events-none"></div>
-                                    </ol>
-                                </div>
-                            </div>
-                            <SendMessageForm sendMessage={sendMessage} />
-                        </main>
-                    </div>
-                </div>
+                <MessageContainer messages={messages} chatRoomId={currentRoomId} setMessages={setMessages} sendMessage={sendMessage} conn={conn}/>
 
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>

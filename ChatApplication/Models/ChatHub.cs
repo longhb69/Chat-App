@@ -9,6 +9,7 @@ using ChatApplication.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Security.Claims;
@@ -91,9 +92,6 @@ public async Task<long> SendMessage(string message)
         if (_shared.connections2.TryGetValue(Context.ConnectionId, out UserConnection2 conn))
         {
             var user = await _userRepository.GetById(conn.UserId);
-            await Clients.Group("ChatRoom_" + conn.ChatRoomId)
-                   .SendAsync("ReceiveMessage", user.UserDto.UserName, message, DateTime.UtcNow);
-
             var new_message = new Message
             {
                 Content = message,
@@ -102,9 +100,17 @@ public async Task<long> SendMessage(string message)
                 Timestamp = DateTime.UtcNow,
             };
             messageId = await _messageRepository.Add(new_message);
+            await Clients.Group("ChatRoom_" + conn.ChatRoomId)
+                   .SendAsync("ReceiveMessage", messageId, user.UserDto.UserName, message, DateTime.UtcNow);
         }
         return messageId;
     }
+    public async Task NotifyAttachment(long chatRoomId, long messageId)
+    {
+        await Clients.Group("ChatRoom_" + chatRoomId)
+                       .SendAsync("ReceiveAttachment", messageId);
+    }
+
     public async Task JoinChat(UserConnection conn) 
     {
         await Clients.All

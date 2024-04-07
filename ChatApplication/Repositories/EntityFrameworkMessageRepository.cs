@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Owin.Security.Provider;
+
 //using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
@@ -66,6 +68,7 @@ public class EntityFrameworkMessageRepository : IMessageRepository
                 await dbContext.SaveChangesAsync();
                 response.StatusCode = StatusCodes.Status200OK;
                 response.Message = $"{attachment.Id} has been created successfully";
+                response.Attachemnt = attachment.AsDto();
             }
             catch (Exception ex)
             {
@@ -101,14 +104,28 @@ public class EntityFrameworkMessageRepository : IMessageRepository
             .ToListAsync();
     }
 
-    public async Task<Message> GetById(long messageId)
+    public async Task<MessageResult> GetByIdAysnc(long messageId)
     {
         var message = await dbContext.Messages.FindAsync(messageId);
         if(message == null) 
         {
-            throw new Exception($"Message with ID {messageId} not found");
+            return new MessageResult
+            {
+                StatusCode = StatusCodes.Status404NotFound,
+                ErrorMessage = $"Message with ID ${messageId} Not Found!"
+            };
         }
-        return message;
+        else
+        {
+            User user = await dbContext.Users.FindAsync(message.SenderId);
+            List<Attachment> attachment = await dbContext.Attachments.Where(a => a.MessageId == message.Id).ToListAsync();
+            MessageDto test = message.AsDto(user, attachment);
+            return new MessageResult
+            {
+                StatusCode = StatusCodes.Status200OK,
+                MessageDto = message.AsDto(user, attachment)
+            };
+        }
     }
 
     public async Task<MessageResult> GetMessagesForChatRoom(long chatRoomId ,int pageNumber, int pageSize)
@@ -142,6 +159,7 @@ public class EntityFrameworkMessageRepository : IMessageRepository
                  .FirstOrDefault(),
             Attachments = dbContext.Attachments
                 .Where(a => a.MessageId == m.Id)
+                .OrderBy(a => a.Id)
                 .ToList()
          })
          .OrderBy(m =>m.Message.Timestamp)

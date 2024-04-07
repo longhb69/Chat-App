@@ -47,17 +47,32 @@ export default function Home() {
         }
     }
 
-    const sendMessage = async (message, attchment = false) => {
+    const sendMessage = async (message, files = []) => {
         try {
-            if (attchment) {
-                const messageId = await conn.invoke("SendMessage", message);
-
+            if (files.length > 0) {
+                const attachment = true
+                const messageId = await conn.invoke("SendMessage", message, attachment);
+                let uploadResults = [];
+                const uploadPromises = files.map(async file => {
+                    const formData = new FormData()
+                    formData.append('file', file);
+                    const url = BaseUrl + `api/FileUpLoad/attachment/upload/${messageId}`
+                    return await axios.post(url, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                })
+                uploadResults = await Promise.allSettled(uploadPromises, messageId)
+                return {messageId, uploadResults}
             }
             else {
                 await conn.invoke("SendMessage", message);
+                return { success: true, message: "Message sent successfully" };
             }
         } catch (e) {
             console.log(e);
+            return { success: false, error: e.message }
         }
     }
     const JoinSpecificChatRoom = async (userId, chatroomId, roomName) => {
@@ -70,16 +85,32 @@ export default function Home() {
                 .build();
 
             conn.on("UsersInRoom", (users) => {
-                console.log("User in room intail ", users.length)
-                console.log(users)
                 setUsers(users);
             })
 
-            conn.on("ReceiveMessage", (username, content, timestamp) => {
+            conn.on("ReceiveMessage", (id, username, content, timestamp) => {
                 const newmsg = true
-                setMessages(messages => [...messages, { username, content, timestamp, newmsg }]);
-
+                setMessages(messages => [...messages, { id,username, content, timestamp, newmsg }]);
             });
+
+            conn.on("ReceiveAttachment", (messageId) => {
+                axios.get(BaseUrl + `api/message/${messageId}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer ' + localStorage.getItem('token'),
+                    }
+                }).then((response) => {
+                    setMessages(prevMessages => {
+                        return prevMessages.map(message => {
+                            if(message.id === messageId) {
+                                console.log(response.data)
+                                return {...message, attachments: response.data.attachments}
+                            }
+                            return message
+                        })
+                    })
+                })
+            })
 
             conn.onclose(e => {
                 setConnection();
@@ -100,8 +131,6 @@ export default function Home() {
             }).then((response) => {
                 setMessages(response.data)
             })
-
-
         } catch (e) {
             console.log(e)
         }
@@ -124,7 +153,7 @@ export default function Home() {
             <div className='relative overflow-hidden flex h-full w-full'>
                 {<Rooms JoinSpecificChatRoom={JoinSpecificChatRoom} GoToAccountChannel={GoToAccountChannel} currentRoomId={currentRoomId} />}
                 {conn
-                    ? users.length > 0 && <ChatRoom conn={conn} messages={messages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={roomName} currentRoomId={currentRoomId} />
+                    ? users.length > 0 && <ChatRoom conn={conn} messages={messages} setMessages={setMessages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={roomName} currentRoomId={currentRoomId} />
                     : null
                 }
                 {accountConn

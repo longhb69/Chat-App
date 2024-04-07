@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BaseUrl } from "../shared";
 import AttachmentImage from "./AttachmentImage";
-import ImageFoucsModal from "./ImageFoucsModal";
+import { UseModal } from "../ModalContext";
 
 export default function AttachmentRender({ attachments }) {
     const [grid, setGrid] = useState('');
@@ -26,15 +26,23 @@ export default function AttachmentRender({ attachments }) {
     const [itemStart, setItemStart] = useState(attachments.length)
     const [secondRowItems, setSecondRowItems] = useState(0);
     const [thirdItemStart, setThirdItemStart] = useState(0);
-
-    const [imageFocus, setImageFocus] = useState(false);
+    const { setModal, setInitialItem } = UseModal();
 
     useEffect(() => {
-        var grid
         var attachLength = attachments.length
         if (attachLength === 1) {
             setGrid(oneByOneGrid)
-            setWidth(550)
+            const image = attachments[0]
+            const divisor = image.width / 550
+            const rezieHeight = parseInt(Math.round(image.height / divisor))
+            if (rezieHeight > 350) {
+                setWidth(Math.floor(image.width / 2.22))
+            } else {
+                setWidth(550)
+            }
+            if (image.width < 550) {
+                setWidth(image.width)
+            }
         }
         else if (attachLength === 2) {
             setGrid(oneByTwoGrid)
@@ -68,7 +76,6 @@ export default function AttachmentRender({ attachments }) {
                 alength -= 3;
                 thirdByThirdItem += 3
             } while (alength >= 3)
-            console.log(alength, thirdByThirdItem)
             setThirdItemStart(alength)
             setSecondHeight(181)
             setSecondWidth(181)
@@ -90,11 +97,26 @@ export default function AttachmentRender({ attachments }) {
         }
     }, [])
     const getThumnail = (attachmentName, width, height) => {
-        var url = BaseUrl + (width != 0 ? `api/FileUpload/attachment/dowload?fileName=${attachmentName}&width=${width}` : `api/FileUpload/attachment/dowload?fileName=${attachmentName}`)
+        var url = BaseUrl + (width != 0 ? `api/FileUpload/attachment/download?fileName=${attachmentName}&width=${width}` : `api/FileUpload/attachment/download?fileName=${attachmentName}`)
         if (height !== 0) {
             url += `&height=${height}`
         }
         return url
+    }
+    const handleImageFocus = (initialIndex) => {
+        var items = { modals: [] };
+        attachments.forEach(function (attachment, index) {
+            const modal = {
+                type: attachment.fileType,
+                contentName: attachment.name,
+                contentUrl: attachment.url,
+                width: attachment.width,
+                height: attachment.height,
+            };
+            items.modals.push(modal)
+        })
+        setModal(items)
+        setInitialItem(initialIndex)
     }
 
     return (
@@ -107,14 +129,14 @@ export default function AttachmentRender({ attachments }) {
                                 <div className={firstGridItem}>
                                     {attachments.slice(0, secondRowItems).map((a, idx) => {
                                         return (
-                                            <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={width} height={height} />
+                                            <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={width} height={height} onClick={() => handleImageFocus(idx)} />
                                         );
                                     })}
                                 </div>
                                 <div className={secondGridItem}>
                                     {attachments.slice(secondRowItems, secondRowItems + 1).map((a, idx) => {
                                         return (
-                                            <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={width} height={height} />
+                                            <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={width} height={height} onClick={() => handleImageFocus(idx + secondRowItems)} />
                                         );
                                     })}
                                 </div>
@@ -122,7 +144,7 @@ export default function AttachmentRender({ attachments }) {
                             :
                             attachments.slice(0, itemStart).map((a, idx) => {
                                 return (
-                                    <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={width} height={height} />
+                                    <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={width} height={height} onClick={() => handleImageFocus(idx)} />
                                 );
                             })
                         }
@@ -131,7 +153,7 @@ export default function AttachmentRender({ attachments }) {
                         <div className={grid_2}>
                             {attachments.slice(thirdItemStart).map((a, idx) => {
                                 return (
-                                    <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={secondWidth} height={secondHeight} />
+                                    <AttachmentImage attachmnet={a} getThumnail={getThumnail} width={secondWidth} height={secondHeight} onClick={() => handleImageFocus(idx + thirdItemStart)} />
                                 );
                             })}
                         </div>

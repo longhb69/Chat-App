@@ -15,8 +15,8 @@ public static class DataExtensions
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
     {
-        var connString = configuration.GetConnectionString("ChatApplicationContext");
-        services.AddSqlServer<ChatApplicationContext>(connString)
+        var connString = configuration.GetConnectionString("AuthDbContextConnection");
+        services.AddDbContext<ChatApplicationContext>(options => options.UseNpgsql(connString))
             .AddSingleton<IUserIdProvider, CustomUserIdProvider>()
             .AddScoped<IMessageRepository, EntityFrameworkMessageRepository>()
             .AddScoped<IChatRoomRepository, FrameworkChatRoomRepository>()
@@ -51,6 +51,10 @@ public static class DataExtensions
                 ValidAudience = configuration["JWT:ValidAudience"],
                 ValidIssuer = configuration["JWT:ValidIssuer"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"])),
+                LifetimeValidator = (notBefore, expires, token, validationParameters) =>
+                {
+                    return ((expires > DateTime.UtcNow) && (expires <= DateTime.UtcNow.AddHours(24)));
+                }
             };
         });
         services.AddHttpContextAccessor();
