@@ -192,6 +192,9 @@ namespace ChatApplication.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("text");
+
                     b.Property<long?>("ChatRoomId")
                         .HasColumnType("bigint");
 

@@ -57,10 +57,6 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
-            "FFMpegCore": {
-              "target": "Package",
-              "version": "[5.1.0, )"
-            },
             "LinqKit.EntityFramework": {
               "target": "Package",
               "version": "[1.2.5, )"
@@ -128,6 +124,10 @@
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Xabe.FFmpeg": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

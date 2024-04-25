@@ -56,6 +56,9 @@ export function ModalProvider({ children }) {
                                                 {modal.modals.map((item) => {
                                                     switch (item.type) {
                                                         case '.jpg':
+                                                        case "jpg":
+                                                        case ".webp":
+                                                        case ".png":
                                                             return <ImageModal image={item} />
                                                         default:
                                                             return null
@@ -77,7 +80,13 @@ export function ModalProvider({ children }) {
                                                     {(() => {
                                                         switch (modal.modals[initialItem].type) {
                                                             case '.jpg':
+                                                            case "jpg":
+                                                            case ".webp":
+                                                            case ".png":
                                                                 return <ImageModal image={modal.modals[initialItem]} carousel={true} />
+                                                            case ".mp4":
+                                                            case ".webm":
+                                                                return <VideoModal video={modal.modals[initialItem]}/>
                                                             default:
                                                                 return null
                                                         }
@@ -127,7 +136,6 @@ export function ModalProvider({ children }) {
                 else {
                     setModal('')
                 }
-
             };
             document.body.addEventListener('click', handleClickOutside);
             var newWidth;
@@ -155,7 +163,7 @@ export function ModalProvider({ children }) {
                 newHeight = 500;
                 setHeight(500)
             }
-            setUrl(BaseUrl + `api/FileUpload/attachment/dowload?fileName=${image.contentName}&width=${newWidth}&height=${newHeight}`)
+            setUrl(BaseUrl + `api/FileUpload/attachment/download?fileName=${image.contentName}&width=${newWidth}&height=${newHeight}`)
             setTimeout(function () {
                 if (loadingRef.current) loadingRef.current.classList.add('loading-image')
             }, 3000)
@@ -177,6 +185,60 @@ export function ModalProvider({ children }) {
                     </div>
                 </div>
                 <a href={image.contentUrl} target="_blank" className="absolute top-[100%] cursor-pointer text-[#fff] text-sm no-underline font-medium leading-7 opacity-[.5] transition-opacity hover:opacity-[1] hover:underline">Mở trong trình duyệt</a>
+            </>
+        )
+    }
+
+    const VideoModal = ({video}) => {
+        let firstClick = false
+        const [width, setWidth] = useState(0);
+        const [height, setHeight] = useState(0);
+
+        const handleClickOutside = (event) => {
+            setModal('')
+        }
+
+        useEffect(() => {
+            setTimeout(function () {
+                document.body.addEventListener('click', handleClickOutside);
+            }, 500)
+            var newWidth;
+            var newHeight;
+            if (video.width) {
+                var resizeWidth = 0;
+                if (video.width <= 800) {
+                    resizeWidth = video.width
+                } else if (video.width <= 1280) {
+                    resizeWidth = Math.floor(video.width / 1.46)
+                } else  if(video.width > 1280) {
+                    resizeWidth = 1100
+                } else {
+                    resizeWidth = Math.floor(video.width / 2.2)
+                }
+                const divisor = video.width / resizeWidth;
+                const resizeHeight = parseInt(Math.round(video.height / divisor));
+                newWidth = resizeWidth
+                setWidth(resizeWidth)
+                newHeight = resizeHeight;
+                setHeight(resizeHeight)
+            }
+            else {
+                setWidth(newWidth = 1000)
+                newHeight = 500;
+                setHeight(500)
+            }
+            return () => {
+                document.body.removeEventListener('click', handleClickOutside);
+            }
+        }, [])
+        return (
+            <>
+                <div className="overflow-hidden relative block select-text" style={{ width: `${width}px`, height: `${height}px` }}>
+                    <div className="w-full h-full">
+                        <video className="w-full h-full block relative object-contain rounded-[3px] overflow-clip" src={video.contentUrl} controls autoPlay/>
+                    </div>
+                </div>
+                <a href={video.contentUrl} target="_blank" className="absolute top-[100%] cursor-pointer text-[#fff] text-sm no-underline font-medium leading-7 opacity-[.5] transition-opacity hover:opacity-[1] hover:underline">Mở trong trình duyệt</a>
             </>
         )
     }

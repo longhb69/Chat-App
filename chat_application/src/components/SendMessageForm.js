@@ -94,10 +94,12 @@ export default function SendMessageForm({ setMessages, sendMessage, chatRoomId, 
                 const msg = input.map(m => m.children[0].text + '\n').join('')
                 if (attachList.length > 0) {
                     setAttachList([])
+                    console.log("attachList", attachList)
                     const { messageId, uploadResults } = await sendMessage(msg, attachList)
                     let attachments = []
                     uploadResults.forEach(upload => {
                         if(upload.status === 'fulfilled') {
+                            console.log("upload done", upload)
                             attachments.push(upload.value.data.attachemnt)
                             conn.invoke("NotifyAttachment", chatRoomId, messageId)
                         }
@@ -167,13 +169,13 @@ export default function SendMessageForm({ setMessages, sendMessage, chatRoomId, 
 
     const handleAttachmentChange = (event) => {
         const files = event.target.files
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm']
         if (files) {
             const filesArray = Array.from(files)
             filesArray.forEach((file) => {
                 const fileName = file.name.toLowerCase()
                 const extension = fileName.substring(fileName.lastIndexOf('.') + 1)
-                const isImageByExtension = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)
+                const isImageByExtension = ['jpg', 'jpeg', 'png', 'gif', 'webp', `mp4`].includes(extension)
 
                 const isImageByType = allowedTypes.includes(file.type)
 

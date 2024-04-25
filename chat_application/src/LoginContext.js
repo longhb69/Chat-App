@@ -1,6 +1,4 @@
-import { useContext, useState, createContext, useEffect, useCallback } from "react";
-import { baseUrl } from './shared';
-import axios from 'axios';
+import { useContext, useState, createContext, useEffect } from "react";
 
 const LoginContext = createContext();
 const AccountContext = createContext();

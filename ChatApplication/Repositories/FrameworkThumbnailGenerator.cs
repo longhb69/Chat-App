@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.DiaSymReader;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.Formats.Webp;
 using SixLabors.ImageSharp.Processing;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
@@ -18,7 +20,7 @@ public class FrameworkThumbnailGenerator : IThumbnailGenerator
 
         extension = extension.Replace(".", "");
 
-        var isSupported = Regex.IsMatch(extension, "gif|png|jpe?g", RegexOptions.IgnoreCase);
+        var isSupported = Regex.IsMatch(extension, "gif|png|jpe?g|webp", RegexOptions.IgnoreCase);
 
         if (isSupported)
         {
@@ -33,6 +35,9 @@ public class FrameworkThumbnailGenerator : IThumbnailGenerator
                 case "jpeg":
                     encoder = new JpegEncoder();
                     break;
+                case "webp":
+                    encoder = new WebpEncoder();
+                    break;
                 case "gif":
                     encoder = new GifEncoder();
                     break;
@@ -40,7 +45,6 @@ public class FrameworkThumbnailGenerator : IThumbnailGenerator
                     break;
             }
         }
-
         return encoder;
     }
     public async Task<Stream> GenerateThumbnail(Stream fileStream, int width, int height, string extension)
@@ -72,32 +76,70 @@ public class FrameworkThumbnailGenerator : IThumbnailGenerator
             return output;
         }
     }
-    public async Task<Stream> GenerateVideoThumbnail(Stream fileStream, int targetWidth, int targetHeight)
+    public async Task<Stream> GenerateVideoThumbnail(Stream stream, int targetWidth, int targetHeight)
     {
-        var process = new Process
+        if(stream == null || targetWidth <= 0)
         {
-            StartInfo = new ProcessStartInfo
+            throw new ArgumentException("Invalid input parameters");
+        }
+        string customTempDirectory = @"D:\video";
+        var tempInputFilePath = Path.Combine(customTempDirectory, Path.GetRandomFileName() + "input.mp4");
+        var tempOutputFilePath = Path.Combine(customTempDirectory, Path.GetRandomFileName() + "output.webp");
+
+        try
+        {
+            await using (var filestream = new FileStream(tempInputFilePath, FileMode.Create, FileAccess.Write))
+            {
+                byte[] buffer = new byte[81920];
+                int bytesRead;
+                long totalBytesRead = 0;
+                int targetByte = 2000000;
+                while (totalBytesRead <= targetByte && (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    await filestream.WriteAsync(buffer, 0, bytesRead);
+                    totalBytesRead += bytesRead;
+                }
+            }
+            var processStartInfo = new ProcessStartInfo
             {
                 FileName = "ffmpeg",
-                Arguments = $"-i pipe: -vf scale=550:350,setsar=1 output.mp4",
-                UseShellExecute = false,
-                RedirectStandardInput = true,
+                Arguments = $"-i \"{tempInputFilePath}\" -vf scale={targetWidth}:-1 -ss 00:00:00 -vframes 1 \"{tempOutputFilePath}\"",
                 RedirectStandardOutput = true,
-                CreateNoWindow = true
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                WorkingDirectory = "C:\\FFMPEG"
+            };
+            using (var process = Process.Start(processStartInfo))
+            {
+                if (process == null)
+                {
+                    throw new Exception("FFmpeg process could not be started.");
+                }
+                await process.WaitForExitAsync();
             }
-        };
-
-        process.Start();
-        //MemoryStream imageStream = new MemoryStream();
-        //using (var outputStream = process.StandardOutput.BaseStream)
-        //{
-        //    outputStream.CopyTo(imageStream);
-        //}
-        Console.WriteLine("Start");
-        process.WaitForExit();
-        process.Close();
-        Console.WriteLine("Done");
-        //imageStream.Seek(0, SeekOrigin.Begin);
-        return fileStream;
+            using (var thumbnailFileStream = new FileStream(tempOutputFilePath, FileMode.Open, FileAccess.Read))
+            {
+                var thumbnailStream = new MemoryStream();
+                await thumbnailFileStream.CopyToAsync(thumbnailStream);
+                thumbnailStream.Seek(0, SeekOrigin.Begin);
+                return thumbnailStream;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            if(File.Exists(tempOutputFilePath))
+            {
+                File.Delete(tempOutputFilePath);
+            }
+            if(File.Exists(tempInputFilePath))
+            {
+                File.Delete(tempInputFilePath);
+            }
+        }
     }
 }

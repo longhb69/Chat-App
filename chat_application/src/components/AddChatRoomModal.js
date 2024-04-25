@@ -35,7 +35,7 @@ export default function AddChatRoomModal(props) {
 
     const AddChatRoom = async (e) => {
         e.preventDefault();
-        addChatRoomBtnRef.current.classList.add('loading')
+        addChatRoomBtnRef.current.classList.add('loading-image')
         const data = {
             name: chatRoomName,
             ownerId: authInfo.userId
@@ -57,11 +57,16 @@ export default function AddChatRoomModal(props) {
             const response = await axios.post(url, data, config)
             if (response.status === 201) {
                 props.setTrigger(false)
-                addChatRoomBtnRef.current.classList.remove('loading')
+                addChatRoomBtnRef.current.classList.remove('loading-image')
                 props.refetch();
             }
         } catch (error) {
             console.error('Error creating chat rooom:', error);
+        }
+        finally {
+            setImageSelected(null)
+            setChatRoomName('')
+            setPreview('')
         }
     }
     const handleImageChange = (event) => {
@@ -84,6 +89,13 @@ export default function AddChatRoomModal(props) {
             return null;
         }
     };
+
+    const handleClose = () => {
+        props.setTrigger(false)
+        setImageSelected(null)
+        setChatRoomName('')
+        setPreview('')
+    }
 
     return (
         <div className={`modal-overlay ${props.trigger ? 'show' : 'hidden'}`} >
@@ -130,7 +142,7 @@ export default function AddChatRoomModal(props) {
                                 />
                             </div>
                         </div>
-                        <div className='absolute top-0 right-3 hover:cursor-pointer' onClick={() => props.setTrigger(false)}>
+                        <div className='absolute top-0 right-3 hover:cursor-pointer' onClick={() => handleClose()}>
                             <FontAwesomeIcon icon={faX} />
                         </div>
                         <div className='flex justify-end mt-3 text-[#fff] '>

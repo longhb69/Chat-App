@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using ChatApplication.Repositories;
 
 namespace ChatApplication.Controllers;
 
@@ -17,11 +18,13 @@ public class AccountController : Controller
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _configuration;
     private readonly ILogger<AccountController> _logger;
+    private readonly IUserRepository _userRepository;
 
-    public AccountController(UserManager<User> userManager, IConfiguration configuration, ILogger<AccountController> logger)
+    public AccountController(UserManager<User> userManager, IConfiguration configuration, ILogger<AccountController> logger, IUserRepository userRepository)
     {
         _userManager = userManager;
         _configuration = configuration;
+        _userRepository = userRepository;
         _logger = logger;
     }
 
@@ -72,6 +75,18 @@ public class AccountController : Controller
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+    }
+    [HttpGet]
+    [Route("User/{id}")]
+    public async Task<IActionResult> GetUser(string id)
+    {
+        var result = await _userRepository.GetById(id);
+        if (result.StatusCode == StatusCodes.Status404NotFound) 
+        { 
+            return NotFound(); 
+        };
+       
+        return Ok(result.UserDto);
     }
     private JwtSecurityToken GetToken(List<Claim> authClaims)
     {

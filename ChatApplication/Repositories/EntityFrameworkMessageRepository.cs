@@ -169,6 +169,7 @@ public class EntityFrameworkMessageRepository : IMessageRepository
         var results = messages.Select(m => m.Message.AsDto(m.User, m.Attachments)).ToList();
         return new MessageResult
         {
+
             Messages = results,
             StatusCode = StatusCodes.Status200OK
         };

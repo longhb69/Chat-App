@@ -3,7 +3,7 @@ import embedRegexes from "../utils/embedRegexes ";
 import LinkRender from "./LinkRender";
 import AttachmentRender from "./AttachmentRender";
 
-export default function Message({ message, premessage }, idx) {
+export default function Message({ message, premessage, idx }) {
     const today = new Date();
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -20,15 +20,17 @@ export default function Message({ message, premessage }, idx) {
         } else {
             if (prevmdate !== null && !premessage.newmsg) prevmdate.setMinutes(prevmdate.getMinutes() - timezoneOffset);
         }
-        // embedRegexes.some(({ regex, type }) => {
-        //     const match = message.content.match(regex)   errorr?
-        //     if (match) {
-        //         setLink(true);
-        //         setType(type);
-        //         return true;
-        //     }
-        //     return false
-        // })
+        if(message.content) {
+            embedRegexes.some(({ regex, type }) => {
+            const match = message.content.match(regex)   
+                if (match) {
+                    setLink(true);
+                    setType(type);
+                    return true;
+                }
+                return false
+            })
+        }
     }, [])
 
     const isTenMinuteGap = () => {
@@ -78,7 +80,7 @@ export default function Message({ message, premessage }, idx) {
     };
     return (
         <>
-            {isDayGap() && (
+            {isDayGap() || idx == 0 && (
                 <div className="custom-divider divider-2">
                     <span className="day-gap-divider bg-white">
                         {`${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}`}
@@ -95,7 +97,7 @@ export default function Message({ message, premessage }, idx) {
                             {message.content.length > 1 ?
                                 <div className="leading-5">
                                     {link
-                                        ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
+                                        ? <a target="_blank" href={message.content} className="mt-2 cursor-pointer no-underline hover:underline text-[#006CE7]" rel="noreferrer noopener"><span>{message.content}</span></a>
                                         : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
                                 </div>
                                 : null}
@@ -117,23 +119,27 @@ export default function Message({ message, premessage }, idx) {
                             /> */}
                             <div className="avatar online absolute left-[16px]">
                                 <div className="w-[40px] h-[40px] rounded-full">
-                                    <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    {message.user.avatarUrl ? 
+                                        <img className="w-full h-full overflow-hidden cursor-pointer select-none" src={message.user.avatarUrl} />
+                                    :
+                                        <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp"/>
+                                    }
                                 </div>
                             </div>
                             <h3 className="overflow-hidden relative leading-5 text-base mb-0">
                                 <span>
                                     <span className="font-bold leading-5 overflow-hidden align-baseline">
-                                        {message.username}
+                                        {message.user.userName}
                                     </span>
                                     <span className="text-xs font-medium ml-2 leading-5 align-baseline">
                                         <time>{formatTimestamp()}</time>
                                     </span>
                                 </span>
                             </h3>
-                            {true ? //message.content.length > 1 ?
+                            {message.content && message.content.length > 1 ?
                                 <div className="indent-0 leading-5">
                                     {link
-                                        ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline" rel="noreferrer noopener"><span>{message.content}</span></a>
+                                        ? <a target="_blank" href={message.content} className="cursor-pointer no-underline hover:underline"><span className="text-[#006CE7]">{message.content}</span></a>
                                         : <span className={`outline-none whitespace-pre-line`}>{message.content}</span>}
                                 </div>
                                 : null}

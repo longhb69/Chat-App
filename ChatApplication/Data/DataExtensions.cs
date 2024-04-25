@@ -58,6 +58,7 @@ public static class DataExtensions
             };
         });
         services.AddHttpContextAccessor();
+
         return services;
     }
 }

@@ -742,3 +742,53 @@ form {
     opacity: 0;
     transition: opacity 200ms ease-in-out;
 }
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 5%, 54%);
+    }
+
+    100% {
+        background-color: hsl(210, 3%, 14%);
+    }
+}
+
+.panels{ 
+    flex: 0 0 auto;
+}
+
+.sidebarRegion {
+    flex: 1 0 var(218px);
+}
+.closeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 36px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.zoom-in {
+    animation: zoom-affect 0.1s ease-in-out;
+}
+
+@keyframes zoom-affect {
+    0% {
+        scale: 1.1;
+    }   
+    50% {
+        scale: 0.9876;
+    }
+    100% {
+        scale: 1;
+    }
+}

@@ -22,8 +22,8 @@ export default function AttachmentImage(props) {
                 <div className="imageContent">
                     <div className="imageWrapper" style={{ width: `${props.width}px` }}>
                         <div className="w-full h-full">
-                            <div ref={blurRef} className={`aspect-[${props.width/props.height}/1] w-full h-full blur-load`} style={{backgroundImage: `url(${props.getThumnail(props.attachmnet.name, 10, 0)})`}}>
-                                <img src={props.getThumnail(props.attachmnet.name, props.width, props.height)} className="object-cover block min-h-[100%] min-w-[100%] max-w-[calc(100%+1px)] " /> 
+                            <div ref={blurRef} className={` w-full h-full blur-load`} style={{backgroundImage: `url(${props.getThumbnail(props.attachment.name, 10, 0)})`}}>
+                                <img src={props.getThumbnail(props.attachment.name, props.width, props.height)} className="object-cover block min-h-[100%] min-w-[100%] max-w-[calc(100%+1px)] " />
                             </div>
                         </div>
                     </div>

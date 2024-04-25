@@ -22,7 +22,7 @@ public static class ModelExtensions
         {
             Id = message.Id,
             SenderId = message.SenderId,
-            Username = user?.UserName,
+            User = user?.AsDto(),
             ReceiverId = message.ReceiverId,
             Content = message.Content,
             Timestamp = message.Timestamp,
@@ -47,6 +47,7 @@ public static class ModelExtensions
         {
             Id = user.Id,
             UserName = user.UserName,
+            AvatarUrl = user.AvatarUrl,
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
         };

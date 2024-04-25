@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "JmbJ4lsi0boHyxc1Qo4NXwEx1we5wP++FE6dojxjGJDi+0sVFkhSYu0BSSwxqFruSrrXTu0vzTZTah+iiSF/AA==",
+  "dgSpecHash": "nO5pk2coRYPpskQ1BRffqvkWBODgJ8j6br+0Ed2LAH0YJZ77tuGVoWYfkXTn6Jo6hhNmtLwI0EDs5bufsTcoMg==",
   "success": true,
   "projectFilePath": "C:\\Users\\thanh\\OneDrive\\Máy tính\\.NET\\ChatApplication\\ChatApplication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thanh\\.nuget\\packages\\awssdk.core\\3.7.302.20\\awssdk.core.3.7.302.20.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\awssdk.s3\\3.7.307\\awssdk.s3.3.7.307.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
-    "C:\\Users\\thanh\\.nuget\\packages\\ffmpegcore\\5.1.0\\ffmpegcore.5.1.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
@@ -58,7 +57,6 @@
     "C:\\Users\\thanh\\.nuget\\packages\\humanizer.core.zh-cn\\2.14.1\\humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
-    "C:\\Users\\thanh\\.nuget\\packages\\instances\\3.0.0\\instances.3.0.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\jquery\\1.6.4\\jquery.1.6.4.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\linqkit.core\\1.2.5\\linqkit.core.1.2.5.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\linqkit.entityframework\\1.2.5\\linqkit.entityframework.1.2.5.nupkg.sha512",
@@ -257,8 +255,8 @@
     "C:\\Users\\thanh\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
-    "C:\\Users\\thanh\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\thanh\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
+    "C:\\Users\\thanh\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\thanh\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
@@ -267,7 +265,8 @@
     "C:\\Users\\thanh\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\thanh\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\thanh\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\thanh\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\thanh\\.nuget\\packages\\xabe.ffmpeg\\5.0.0\\xabe.ffmpeg.5.0.0.nupkg.sha512"
   ],
   "logs": [
     {
