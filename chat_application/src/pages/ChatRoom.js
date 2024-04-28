@@ -67,7 +67,7 @@ export default function ChatRoom({ conn, messages, setMessages, sendMessage, clo
     return (
         <div className="flex flex-col overflow-hidden relative grow">
             <div className="content">
-                <SideBar triggerUserSetting={triggerUserSetting}/>
+                {/* <SideBar triggerUserSetting={triggerUserSetting}/> */}
                 <MessageContainer messages={messages} chatRoomId={currentRoomId} setMessages={setMessages} sendMessage={sendMessage} conn={conn}/>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>

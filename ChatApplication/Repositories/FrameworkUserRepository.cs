@@ -32,6 +32,7 @@ public class FrameworkUserRepository : IUserRepository
         {
             Id = user.Id,
             UserName = user.UserName,
+            AvatarUrl = user.AvatarUrl, 
             Email = user.Email,
             PhoneNumber = user.PhoneNumber,
         };

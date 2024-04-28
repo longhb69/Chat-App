@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import { LoginProvider } from './LoginContext';
 import { ModalProvider } from './ModalContext';
 import { PageProvider } from './PageContext';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="" element={<Home/>}/>
               <Route path="channels/:id" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp/>}/>
             </Routes>
           </Router>
         </PageProvider>

@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\models\\modelextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:models\\modelextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\entityframeworkmessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\entityframeworkmessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ModelExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\ModelExtensions.cs",
-              "RelativeDocumentMoniker": "Models\\ModelExtensions.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\ModelExtensions.cs",
-              "RelativeToolTip": "Models\\ModelExtensions.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAgwDcAAAAFAAAA",
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAowE0AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T06:02:28.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EntityFrameworkMessageRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\EntityFrameworkMessageRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\EntityFrameworkMessageRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\EntityFrameworkMessageRepository.cs",
-              "RelativeToolTip": "Repositories\\EntityFrameworkMessageRepository.cs",
-              "ViewState": "AQIAAJUAAAAAAAAAAAAwwKQAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T06:01:49.638Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T05:53:42.262Z",
+              "WhenOpened": "2024-04-27T07:34:05.808Z",
               "EditorCaption": ""
             }
           ]

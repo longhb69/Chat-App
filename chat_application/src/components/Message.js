@@ -119,7 +119,7 @@ export default function Message({ message, premessage, idx }) {
                             /> */}
                             <div className="avatar online absolute left-[16px]">
                                 <div className="w-[40px] h-[40px] rounded-full">
-                                    {message.user.avatarUrl ? 
+                                    {message.user?.avatarUrl ? 
                                         <img className="w-full h-full overflow-hidden cursor-pointer select-none" src={message.user.avatarUrl} />
                                     :
                                         <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp"/>
@@ -129,7 +129,8 @@ export default function Message({ message, premessage, idx }) {
                             <h3 className="overflow-hidden relative leading-5 text-base mb-0">
                                 <span>
                                     <span className="font-bold leading-5 overflow-hidden align-baseline">
-                                        {message.user.userName}
+                                        {message.user ? message.user.userName
+                                        : message.username}
                                     </span>
                                     <span className="text-xs font-medium ml-2 leading-5 align-baseline">
                                         <time>{formatTimestamp()}</time>

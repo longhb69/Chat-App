@@ -4,11 +4,14 @@ import { BaseUrl } from "../shared"
 import axios from "axios"
 import * as gearAnimation from "../animation/gear-animation.json"
 import Lottie from "lottie-react"
+import { useNavigate } from "react-router-dom"
 
 export default function SideBar({triggerUserSetting}) {
     const [authInfo] = useLogin()
-    const [userName, setUserName] = useState('')
+    const [user, setUser] = useState()
     const lottieRef = useRef(null);
+
+    const navigate = useNavigate()
 
     const stopAnimation = () => {
         if (lottieRef.current) {
@@ -22,7 +25,6 @@ export default function SideBar({triggerUserSetting}) {
     }
     useEffect(() => {
         function getUserInfo() {
-            console.log("Fetch user")
             const url = BaseUrl + `api/Account/User/${authInfo.userId}`
             axios.get(url, {
                 headers: {
@@ -31,12 +33,17 @@ export default function SideBar({triggerUserSetting}) {
                 }
             }).then((response) => {
                 if(response.status === 200) {
-                    setUserName(response.data.userName)
+                    setUser(response.data)
                 }
             })
         }
         stopAnimation()
-        getUserInfo()
+        if(!authInfo.loggedIn) {
+            navigate("/login")
+        }
+        else {
+            getUserInfo()
+        }
     }, [])
 
     return (
@@ -44,19 +51,23 @@ export default function SideBar({triggerUserSetting}) {
             <section className="flex bg-[#EBEDEF] panels">
                 <div className="h-[52px] text-sm font-medium flex justify-between items-center px-[8px] relative w-full">
                     <div className="flex items-center min-w-[120px]">
-                        <div className="avatar online">
-                            <div className="w-[32px] h-[32px] rounded-full">
-                                <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                            </div>
-                        </div>
-                        <div className="py-[4px] pl-[8px]">
-                            <div>
-                                <div className="text-sm font-base leading-4 overflow-hidden whitespace-nowrap text-ellipsis">{userName}</div>
-                            </div>
-                            <div>
-                                <div className="text-[12px] font-base leading-4 overflow-hidden whitespace-nowrap text-ellipsis">Trực tuyến</div>
-                            </div>
-                        </div>
+                        {user ? 
+                            <>
+                                <div className="avatar online">
+                                    <div className="w-[32px] h-[32px] rounded-full">
+                                        <img className="w-full h-full overflow-hidden cursor-pointer select-none" src={user.avatarUrl} />
+                                    </div>
+                                </div>
+                                <div className="py-[4px] pl-[8px]">
+                                    <div>
+                                        <div className="text-sm font-base leading-4 overflow-hidden whitespace-nowrap text-ellipsis">{user.userName}</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-[12px] font-base leading-4 overflow-hidden whitespace-nowrap text-ellipsis">Trực tuyến</div>
+                                    </div>
+                                </div>
+                            </>
+                        : null}
                     </div>
                     <div className="flex-nowrap justify-start items-stretch">
                         <button className="cursor-pointer w-[32px] h-[32px] flex items-center justify-center rounded relative hover:bg-[#D7D8DC]"

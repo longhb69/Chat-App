@@ -13,6 +13,7 @@ import LayerContainer from '../components/LayerContainer';
 import { UseModal } from '../ModalContext';
 import { usePage } from '../PageContext';
 import UserLayerContainer from '../components/UserLayerContainer';
+import SideBar from '../components/SideBar';
 
 export default function Home() {
     const [conn, setConnection] = useState();
@@ -31,16 +32,23 @@ export default function Home() {
 
     useEffect(() => {
         if (isLoggedIn()) {
-            const conn = new HubConnectionBuilder()
+            if(isTokenExpired(localStorage.getItem('token'))) {
+                console.log("expirte")
+                navigate("/login")
+            }  
+            else {
+                const conn = new HubConnectionBuilder()
                 .withUrl("http://localhost:5161/chat", {
                     accessTokenFactory: async () => localStorage.getItem('token')
                 })
                 .configureLogging(LogLevel.Information)
                 .build();
-            conn.start();
-            setConnection(conn);
+
+                conn.start();
+                setConnection(conn);
+                navigate("/channels/me")
+            }
         }
-        navigate("/channels/me")
     }, [])
 
     const closeConnection = async () => {
@@ -180,13 +188,24 @@ export default function Home() {
     const GoToAccountChannel = () => {
         //closeConnection();
         setAccountCon(true);
+    }
 
+    function isTokenExpired(token) {
+        if (!token) {
+            return true; 
+        }
+
+        const tokenPayload = JSON.parse(atob(token.split('.')[1])); // Decode token payload
+        const expirationTime = tokenPayload.exp * 1000; // Expiration time in milliseconds
+
+        return Date.now() >= expirationTime; // Check if current time is greater than or equal to expiration time
     }
 
     return <div className='fullscreen'>
         <div className='layers'>
             <div aria-hidden={false} className={`relative overflow-hidden flex h-full w-full ${userSetting ? 'opacity-0' : ''}`}> {/*this layer can add child that handle user Nav */}
                 {<Rooms JoinSpecificChatRoom={JoinSpecificChatRoom} GoToAccountChannel={GoToAccountChannel} currentRoomId={currentRoomId} />}
+                <SideBar triggerUserSetting={setUserSetting}/>
                 {conn
                     ? users.length > 0 && <ChatRoom conn={conn} messages={messages} setMessages={setMessages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={roomName} currentRoomId={currentRoomId} triggerUserSetting={setUserSetting}/>
                     : null

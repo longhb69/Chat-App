@@ -5,6 +5,7 @@ import { BaseUrl } from "../shared";
 import SendMessageForm from "./SendMessageForm";
 import LoadingMessage from "./LoadingMessage";
 import { usePage } from "../PageContext";
+import { useLogin } from "../LoginContext";
 
 
 export default function MessageContainer({ messages, chatRoomId, setMessages, sendMessage, conn}) {
@@ -14,14 +15,21 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
     const [isEnd, setIsEnd] = useState(false)
     const [disableScroll, setDisableScroll] = useState(false)
     const [pageInfo, updatePageInfo] = usePage()
+    const [authInfo] = useLogin()
 
     useEffect(() => {
         if (!disableScroll && messageRef && messageRef.current) {
-            const { scrollHeight, clientHeight } = messageRef.current
-            messageRef.current.scrollTo({
-                left: 0, top: scrollHeight - clientHeight,
-                behavior: 'smooth'
-            })
+            const lastMessage = messages[messages.length - 1]
+            console.log(lastMessage)
+            console.log(authInfo.userName)
+            if(lastMessage.username === authInfo.userName) {
+                console.log(authInfo.userName)
+                const { scrollHeight, clientHeight } = messageRef.current
+                messageRef.current.scrollTo({
+                    left: 0, top: scrollHeight - clientHeight,
+                    behavior: 'smooth'
+                })
+            }
         }
         if(messages.length % 30 !== 0) {
             setIsEnd(true)
