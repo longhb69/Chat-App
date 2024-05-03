@@ -20,9 +20,7 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
     useEffect(() => {
         if (!disableScroll && messageRef && messageRef.current) {
             const lastMessage = messages[messages.length - 1]
-            console.log(lastMessage)
-            console.log(authInfo.userName)
-            if(lastMessage.username === authInfo.userName) {
+            if(lastMessage?.username === authInfo.userName) {
                 console.log(authInfo.userName)
                 const { scrollHeight, clientHeight } = messageRef.current
                 messageRef.current.scrollTo({
@@ -45,7 +43,6 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
     const lazyLoadCallBack = (entries, observer) => {
         entries.forEach((entry) => {
             if(entry.isIntersecting) {
-                console.log("Reached the top of the container")
                 const nextPage = page + 1
                 const currentPage = filterPageInfo(chatRoomId)
                 if(currentPage[chatRoomId] !== nextPage) { //check if next page is already loaded

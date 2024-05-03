@@ -123,6 +123,22 @@ namespace ChatApplication.Migrations
                     b.ToTable("Emojis");
                 });
 
+            modelBuilder.Entity("ChatApplication.Models.Friendships", b =>
+                {
+                    b.Property<string>("user_id_1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("user_id_2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("status")
+                        .HasColumnType("text");
+
+                    b.HasKey("user_id_1", "user_id_2");
+
+                    b.ToTable("Friendships");
+                });
+
             modelBuilder.Entity("ChatApplication.Models.Message", b =>
                 {
                     b.Property<long>("Id")
@@ -430,6 +446,17 @@ namespace ChatApplication.Migrations
                         .HasForeignKey("MessageId");
                 });
 
+            modelBuilder.Entity("ChatApplication.Models.Friendships", b =>
+                {
+                    b.HasOne("ChatApplication.Models.User", "User1")
+                        .WithMany("Friendships")
+                        .HasForeignKey("user_id_1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User1");
+                });
+
             modelBuilder.Entity("ChatApplication.Models.Message", b =>
                 {
                     b.HasOne("ChatApplication.Models.ChatRoom", "ChatRoom")
@@ -546,6 +573,8 @@ namespace ChatApplication.Migrations
             modelBuilder.Entity("ChatApplication.Models.User", b =>
                 {
                     b.Navigation("ChatRooms");
+
+                    b.Navigation("Friendships");
 
                     b.Navigation("UserChatRoom");
                 });

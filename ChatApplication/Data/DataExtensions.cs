@@ -25,6 +25,7 @@ public static class DataExtensions
             .AddScoped<IStorage, FrameworkStorageRepository>()
             .AddScoped<IS3Client, FrameworkS3ClientRepository>()
             .AddScoped<IThumbnailGenerator, FrameworkThumbnailGenerator>()
+            .AddScoped<IFriendShipRepository, FrameworkFriendShipRepository>()  
             .AddIdentity<User, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;

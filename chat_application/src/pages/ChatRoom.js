@@ -7,6 +7,7 @@ import axios from "axios";
 import { useLogin } from "../LoginContext";
 import MessageContainer from "../components/MessageContainer";
 import SideBar from "../components/SideBar";
+import Rooms from "../components/Rooms";
 
 
 export default function ChatRoom({ conn, messages, setMessages, sendMessage, closeConnection, users, roomName, currentRoomId, triggerUserSetting }) {
@@ -14,6 +15,8 @@ export default function ChatRoom({ conn, messages, setMessages, sendMessage, clo
     const [query, setQuery] = useState('');
     const [result, setResult] = useState();
     const [authInfo, setAuthInfo] = useLogin();
+
+
 
     const handleInputChange = debounce((event) => {
         setQuery(event.target.value);
@@ -74,7 +77,6 @@ export default function ChatRoom({ conn, messages, setMessages, sendMessage, clo
                         <Modal.Title>Mời bạn bè vào {roomName}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
                         <div className="">
                             <label htmlFor="friendName">Friend's Name:</label>
                             <input type="text" className="form-control" id="friendName"

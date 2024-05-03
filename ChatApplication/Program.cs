@@ -54,6 +54,7 @@ app.UseChatRoomEndpoints();
 app.UseUserChatRoomEndpoints();
 app.UseMessageEndpoints();
 app.UseUserEndpoints();
+app.UseFriendShipEndPoints();
 app.UseTestEndpoints();
 
 app.MapHub<ChatHub>(pattern: "/chat");

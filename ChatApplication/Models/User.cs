@@ -8,6 +8,8 @@ public class User : IdentityUser
     public ICollection<ChatRoom>? ChatRooms { get; set; }
     public ICollection<UserChatRoom> UserChatRoom { get; set; }
 
+    public ICollection<Friendships> Friendships { get; set; }
+
     [Url]
     public String? AvatarUrl { get; set; }   
 

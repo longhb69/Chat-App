@@ -7,6 +7,7 @@ import { useLogin } from "../LoginContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { Link } from "react-router-dom";
 
 export default function Rooms({ conn, JoinSpecificChatRoom, GoToAccountChannel, currentRoomId }) {
     const [authInfo, setAuthInfo] = useLogin();
@@ -26,25 +27,30 @@ export default function Rooms({ conn, JoinSpecificChatRoom, GoToAccountChannel, 
     // }, [conn]);
 
     return <nav className="flex flex-col gap-2 items-center pt-3 pb-3 pl-3 pr-2 bg-[#E3E5E8] shrink-0">
-        <button
-            className="w-[55px] h-[55px]"
-            onClick={() => GoToAccountChannel()}>
-            <div className="w-full h-full bg-[#5865F2] flex justify-center items-center border-rounded-animation">
-                <span>You</span>
-            </div>
-        </button>
+        <div className="relative flex items-center justify-center room-container">
+            <div className={`${currentRoomId === -1 ? `active-bar-selected` : `active-bar`}`}></div>
+            <Link
+                className="w-[55px] h-[55px]"
+                to={`/channels/me`}>
+                <div className={`w-full h-full flex justify-center items-center border-rounded-animation  ${currentRoomId === -1 ? `bg-[#5865F2]` : ` bg-[#fff]`} hover:bg-[#5865F2]`}>
+                    <span>You</span>
+                </div>
+            </Link>
+        </div>
         {rooms.map((r, index) => {
             return (
                 <div className="relative flex items-center justify-center room-container">
-                    <div className={`bg-[#000] ${currentRoomId === r.id ? `active-bar-selected` : `active-bar`}`}></div>
-                    <button
+                    <div className={`${currentRoomId === r.id ? `active-bar-selected` : `active-bar`}`}></div>
+                    <Link
                         className="w-[55px] h-[55px]"
-                        onClick={() => JoinSpecificChatRoom(authInfo.userId, r.id, r.name)}>
+                        //onClick={() => JoinSpecificChatRoom(authInfo.userId, r.id)}
+                        to={`/channels/${r.id}`}
+                    >
                         {r.imageUrl ? <img src={r.imageUrl} className="object-cover w-full h-full flex justify-center items-center border-rounded-animation" />
                             : <div className={`w-full h-full flex justify-center items-center border-rounded-animation ${currentRoomId === r.id ? `bg-[#5865F2]` : ` bg-[#fff]`} hover:bg-[#5865F2]`}>
                                 <div className={`text-xl`}>{r.name[0]}</div>
                             </div>}
-                    </button>
+                    </Link>
                     <div className=" hover-room-name absolute start-16 font-semibold z-[2]">
                         <div className="pointer z-[2]"></div>
                         <div className="room-name-box bg-[#fff]">{r.name}</div>

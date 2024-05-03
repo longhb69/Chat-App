@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\endpoints\\friendshipendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:endpoints\\friendshipendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAowE0AAAAFAAAA",
+              "Title": "FriendShipEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\FriendShipEndpoints.cs",
+              "RelativeDocumentMoniker": "Endpoints\\FriendShipEndpoints.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\FriendShipEndpoints.cs",
+              "RelativeToolTip": "Endpoints\\FriendShipEndpoints.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwB4AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T07:34:05.808Z",
+              "WhenOpened": "2024-05-03T15:32:05.711Z",
               "EditorCaption": ""
             }
           ]

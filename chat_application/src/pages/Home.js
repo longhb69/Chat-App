@@ -7,13 +7,14 @@ import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import axios, {Axios} from 'axios';
 import { BaseUrl } from '../shared';
 import { useLogin } from '../LoginContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AddChatRoomModal from '../components/AddChatRoomModal';
 import LayerContainer from '../components/LayerContainer';
 import { UseModal } from '../ModalContext';
 import { usePage } from '../PageContext';
 import UserLayerContainer from '../components/UserLayerContainer';
 import SideBar from '../components/SideBar';
+import AccountRoom from './AccountRoom';
 
 export default function Home() {
     const [conn, setConnection] = useState();
@@ -27,29 +28,35 @@ export default function Home() {
     const [pageInfo, updatePageInfo] = usePage()
     const [userSetting, setUserSetting] = useState(false)
 
-
+    const { id } = useParams()
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isLoggedIn()) {
             if(isTokenExpired(localStorage.getItem('token'))) {
-                console.log("expirte")
                 navigate("/login")
             }  
             else {
-                const conn = new HubConnectionBuilder()
-                .withUrl("http://localhost:5161/chat", {
-                    accessTokenFactory: async () => localStorage.getItem('token')
-                })
-                .configureLogging(LogLevel.Information)
-                .build();
+                // const conn = new HubConnectionBuilder()
+                // .withUrl("http://localhost:5161/chat", {
+                //     accessTokenFactory: async () => localStorage.getItem('token')
+                // })
+                // .configureLogging(LogLevel.Information)
+                // .build();
 
-                conn.start();
-                setConnection(conn);
-                navigate("/channels/me")
+                // conn.start();
+                // setConnection(conn);
+                // setAccountCon(true)
+                // navigate("/channels/me")
+                if(id > 0) {
+                    JoinSpecificChatRoom(authInfo.userId, Number(id))
+                }
+                else if (id=== "me"){
+                    GoToAccountChannel()
+                }
             }
         }
-    }, [])
+    }, [id])
 
     const closeConnection = async () => {
         try {
@@ -87,7 +94,7 @@ export default function Home() {
             return { success: false, error: e.message }
         }
     }
-    const JoinSpecificChatRoom = async (userId, chatroomId, roomName) => {
+    const JoinSpecificChatRoom = async (userId, chatroomId) => {
         try {
             closeConnection();
             setAccountCon(false)
@@ -133,8 +140,8 @@ export default function Home() {
             await conn.start();
             await conn.invoke("JoinRoom", { userId, chatroomId });
             setConnection(conn)
-            setRoomName(roomName);
-            navigate("/channels/" + chatroomId )
+            //setRoomName(roomName);
+            //navigate("/channels/" + chatroomId )
             setCurrentRoomId(chatroomId);
             GetMessagesForChatRoom(chatroomId)
         } catch (e) {
@@ -154,7 +161,6 @@ export default function Home() {
     const fetchMessages = async (chatroomId, page = 1) => {
         setMessages([])
         for(let i = 0;i<page;i++) {
-            console.log(i)
             let response = await axios.get(BaseUrl + `api/message_for_chatroom/${chatroomId}?pageNumber=${i+1}`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -186,7 +192,9 @@ export default function Home() {
         }
     }, [])
     const GoToAccountChannel = () => {
-        //closeConnection();
+        navigate("/channels/me")
+        setCurrentRoomId(-1)
+        closeConnection();
         setAccountCon(true);
     }
 
@@ -205,13 +213,20 @@ export default function Home() {
         <div className='layers'>
             <div aria-hidden={false} className={`relative overflow-hidden flex h-full w-full ${userSetting ? 'opacity-0' : ''}`}> {/*this layer can add child that handle user Nav */}
                 {<Rooms JoinSpecificChatRoom={JoinSpecificChatRoom} GoToAccountChannel={GoToAccountChannel} currentRoomId={currentRoomId} />}
-                <SideBar triggerUserSetting={setUserSetting}/>
                 {conn
-                    ? users.length > 0 && <ChatRoom conn={conn} messages={messages} setMessages={setMessages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={roomName} currentRoomId={currentRoomId} triggerUserSetting={setUserSetting}/>
+                    ? users.length > 0 && 
+                        <>
+                            <SideBar triggerUserSetting={setUserSetting}/>
+                            <ChatRoom conn={conn} messages={messages} setMessages={setMessages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={"roomName"} currentRoomId={currentRoomId} triggerUserSetting={setUserSetting}/>
+                        </>
                     : null
                 }
                 {accountConn
-                    ? <div>Account</div>
+                    ? 
+                        <>
+                            <SideBar triggerUserSetting={setUserSetting} account={true}/>
+                            <AccountRoom/>
+                        </>
                     : null}
 
                 {/* <div className='w-[100px]'>

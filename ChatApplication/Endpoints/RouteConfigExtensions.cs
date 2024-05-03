@@ -20,6 +20,10 @@ public static class RouteConfigExtensions
     {
         UserEndpoints.ConfigureRoutes(endpoints);
     }
+    public static void UseFriendShipEndPoints(this IEndpointRouteBuilder endpoints)
+    {
+        FriendShipEndpoints.ConfigureRoutes(endpoints);
+    }
     public static void UseTestEndpoints(this IEndpointRouteBuilder endpoints)
     {
         TestEndpoints.ConfigureRoutes(endpoints);

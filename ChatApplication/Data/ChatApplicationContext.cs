@@ -29,6 +29,7 @@ public class ChatApplicationContext : IdentityDbContext<User>
     public DbSet<Emoji> Emojis => Set<Emoji>();
     public DbSet<User> Users => Set<User>();
     public DbSet<UserChatRoom> userChatRooms => Set<UserChatRoom>();
+    public DbSet<Friendships> Friendships => Set<Friendships>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -71,6 +72,16 @@ public class ChatApplicationContext : IdentityDbContext<User>
                .WithMany(u => u.UserChatRoom)
                .HasForeignKey(uc => uc.ChatRoomId)
                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Friendships>(entity =>
+        {
+            entity.HasKey(f => new { f.user_id_1, f.user_id_2 });
+
+            entity.HasOne(f => f.User1)
+                .WithMany(u => u.Friendships)
+                .HasForeignKey(f => f.user_id_1)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         base.OnModelCreating(modelBuilder);

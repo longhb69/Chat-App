@@ -124,6 +124,7 @@ form {
     border-radius: 6px;
     display: none;
     animation: active-bar-scale-in 130ms ease-in-out forwards;
+    background-color: #000;
 }
 
 .active-bar-selected {
@@ -863,4 +864,66 @@ form {
         transform: translateY(0);
         opacity: 1; /* End with opacity 1 */
     }
+}
+
+.scrollerBase {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 0;
+    flex: 1 1 auto;
+}
+.fade {
+    scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+}
+
+.container__43554 {
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: .02em;
+    font-weight: 600;
+    flex: 1 1 auto;
+} 
+
+.container__26baa {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 8px;
+    min-height: 48px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: default;
+    z-index: 2;
+}
+
+.item__48dda {
+    position: relative;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.topPill__63ad4 {
+    border-radius: 4px;
+    margin: 0 8px;
+    padding: 2px 8px;
+}
+.tabBar__73938  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 40px;
+    -webkit-app-region: no-drag;
 }
