@@ -3,12 +3,15 @@ import { BaseUrl } from "../shared";
 import axios from "axios";
 import Lottie from "lottie-react";
 import * as animationData from "../animation/loading-cricle-2 - 1704876191134.json";
+import { useLogin } from "../LoginContext";
 
 export default function AddFriendModal() {
     const inputContainerRef = useRef()
     const [query, setQuery] = useState('');
     const [result, setResult] = useState();
     const [loading, setLoading] = useState(false)
+    const [authInfo] = useLogin()
+    const [friendshipStatuses, setFriendshipStatuses] = useState({});
 
     const handleInputChange = debounce((event) => {
         setQuery(event.target.value);
@@ -60,6 +63,49 @@ export default function AddFriendModal() {
         }
     }
 
+    const handleAddFriend = async (friendId) => {
+        const url = BaseUrl + `api/friendship/${authInfo.userId}/${friendId}`
+        try {
+            const response = await axios.post(url) 
+            if(response.status === 200) {
+                const status = {}
+                status[friendId] = 'pending'
+                setFriendshipStatuses(prevStatuses => ({...prevStatuses, ...status}))
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async function checkFriendShip(targetId) {
+        const url = BaseUrl + `api/checkFriendship/${authInfo.userId}/${targetId}`
+        try {
+            const response = await axios.get(url) 
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        const fetchFriendshipStatuses = async () => {
+            const statuses = {}
+            const promises = []
+            if(result) {
+                result.forEach(user => {
+                if (user.id !== authInfo.userId) {
+                    promises.push(checkFriendShip(user.id).then(status => {
+                        statuses[user.id] = status
+                    }))
+                }
+            })
+            await Promise.all(promises)
+            setFriendshipStatuses(statuses)
+            }
+        }
+        fetchFriendshipStatuses()
+    }, [result])
+
     return (
         <>
             <header className="shirk-0 py-[20px] px-[30px] border-b-[1px]">
@@ -84,21 +130,31 @@ export default function AddFriendModal() {
                         {result && result.length > 0 ?
                             <>
                                 {result.map((user, index) => {
-                                    return (
-                                        <li className="flex h-[50px] items-center ">
-                                            <div className="avatar online mr-[12px]">
-                                                <div className="w-[40px] h-[40px] rounded-full">
-                                                    <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp"/>
+                                    if(user.id !== authInfo.userId) {
+                                        return (
+                                            <li className="flex h-[50px] items-center ">
+                                                <div className="avatar online mr-[12px]">
+                                                    <div className="w-[40px] h-[40px] rounded-full">
+                                                        <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="font-medium mr-[100px] w-[100px] shrink-0 text-ellipsis">{user.userName}</div>
-                                            <button class="btn btn-sm btn-primary h-[32px] ml-[20px]" onClick={() => { }}>
-                                                <div className="my-auto whitespace-nowrap overflow-hidden text-ellipsis">
-                                                    Gửi Yêu Cầu Kết Bạn
-                                                </div>
-                                            </button>
-                                        </li>
-                                    )
+                                                <div className="font-medium mr-[100px] w-[100px] shrink-0 text-ellipsis">{user.userName}</div>
+                                                {friendshipStatuses[user.id] === 'pending'
+                                                    ? 
+                                                        <button class="btn btn-sm btn-success h-[32px] ml-[20px]">
+                                                            <div className="my-auto whitespace-nowrap overflow-hidden text-ellipsis">
+                                                                Đã Gửi Yêu Cầu
+                                                            </div>
+                                                        </button>
+                                                    : 
+                                                    <button class="btn btn-sm btn-primary h-[32px] ml-[20px]" onClick={() => handleAddFriend(user.id)}>
+                                                        <div className="my-auto whitespace-nowrap overflow-hidden text-ellipsis">
+                                                            Gửi Yêu Cầu Kết Bạn
+                                                        </div>
+                                                    </button>}
+                                            </li>
+                                        )
+                                    }
                                 })}
                             </>
                         : null}
