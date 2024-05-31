@@ -14,6 +14,7 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
     const [page, setPage] = useState(1)
     const [isEnd, setIsEnd] = useState(false)
     const [disableScroll, setDisableScroll] = useState(false)
+    const bottomRef = useRef()
     const [pageInfo, updatePageInfo] = usePage()
     const [authInfo] = useLogin()
 
@@ -38,6 +39,7 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
                 setDisableScroll(false)
             }, 1000)
         }
+        console.log(messages)
     }, [messages])
 
     const lazyLoadCallBack = (entries, observer) => {
@@ -123,6 +125,12 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
         return acc
     }, [])
 
+    useEffect(() => {
+        bottomRef.current.scrollIntoView({
+            behavior: 'smooth'
+        })
+    }, [])
+
     return (
         <div className="chat-1">
             <div className="chat-contet">
@@ -135,6 +143,7 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
                                 {messagesWithPrevious.map(({ message, premessage }, idx) => (
                                     <Message key={message.id} message={message} premessage={premessage} idx={idx}/>
                                 ))}
+                                <div ref={bottomRef}></div>
                                 <div className="h-[30px] w-[1px] pointer-events-none"></div>
                             </ol>
                         </div>

@@ -94,7 +94,6 @@ export default function SendMessageForm({ setMessages, sendMessage, chatRoomId, 
                 const msg = input.map(m => m.children[0].text + '\n').join('')
                 if (attachList.length > 0) {
                     setAttachList([])
-                    console.log("attachList", attachList)
                     const { messageId, uploadResults } = await sendMessage(msg, attachList)
                     let attachments = []
                     uploadResults.forEach(upload => {

@@ -36,7 +36,7 @@ app.UseCors(builder =>
     builder.AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials()
-           .WithOrigins("http://192.168.1.4:3000"));
+           .WithOrigins("http://192.168.1.8:3000"));
 
 if (app.Environment.IsDevelopment())
 {
@@ -56,6 +56,7 @@ app.UseMessageEndpoints();
 app.UseUserEndpoints();
 app.UseFriendShipEndPoints();
 app.UseTestEndpoints();
+app.UseEmojiEndpoints();
 
 app.MapHub<ChatHub>(pattern: "/chat");
 app.MapRazorPages();

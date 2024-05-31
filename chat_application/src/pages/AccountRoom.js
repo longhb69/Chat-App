@@ -10,6 +10,7 @@ export default function AccountRoom({conn}) {
     const RequestedPending = () => {
         const [authInfo] = useLogin()
         const [request, setRequest] = useState()
+        const [accepted, setAccepted] = useState([])
 
         useEffect(() => {
             const url = BaseUrl + `api/friendship/${authInfo.userId}`
@@ -20,20 +21,42 @@ export default function AccountRoom({conn}) {
                 console.log(error)
             })
         }, [])
+
+        const AcceptedRequest = async (targetId) => {
+            const url = BaseUrl + `api/friendship/acceptedRequest/${authInfo.userId}/${targetId}`
+            try {
+                const response = await axios.put(url)
+                if(response.status === 200) {
+                    console.log("accepted")
+                    setAccepted(prevAccepted => [...prevAccepted, targetId])
+                }
+            } catch(e) {
+                console.log(e)
+            }
+        }
+
+        const renderFriendStatus = (id) => {
+            return accepted.includes(id) ? <><input type="checkbox" checked="checked" class="checkbox checkbox-success select-none" /></> 
+                                        : <><div className="my-auto whitespace-nowrap overflow-hidden text-ellipsis">Chấp nhận</div></>
+        }
         
         return (
-            <ul className="flex flex-col px-[30px] py-[10px] gap-y-5">
+            <ul className="flex flex-col px-[30px] py-[10px] gap-y-1">
                 {request && request.length > 0 ? 
                     <> 
                         {request.map((user) => {
                             return (
-                                <li className="flex h-[50px] items-center hover:bg-[#E3E5E8] p-2 rounded-lg transition">
+                                <li className="flex h-[50px] items-center hover:bg-[#E3E5E8] p-5 py-8 rounded-lg transition">
                                     <div className="avatar online mr-[12px]]">
                                         <div className="w-[40px] h-[40px] rounded-full">
                                             <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp"/>
                                         </div>
                                     </div>
-                                    <div className="ml-2 font-medium mr-[100px] w-[100px] shrink-0 text-ellipsis">{user.userName}</div>
+                                    <div className="ml-2 font-medium w-[100px] shrink-0 text-ellipsis">{user.userName}</div>
+                                    <button class="btn btn-sm btn-success h-[32px] ml-[20px] text-[#fff]"
+                                        onClick={() => AcceptedRequest(user.id)}>
+                                        {renderFriendStatus(user.id)}
+                                    </button>
                                 </li>
                             )
                         })}

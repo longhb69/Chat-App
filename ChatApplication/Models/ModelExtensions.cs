@@ -6,7 +6,7 @@ namespace ChatApplication.Models;
 
 public static class ModelExtensions
 {
-    public static MessageDto AsDto(this Message message, User user, List<Attachment> attachments)
+    public static MessageDto AsDto(this Message message, User user, List<Attachment> attachments, List<Emoji> emojis)
     {
         var attachmentDtos = attachments.Select(a => new AttachemntDto
         {
@@ -27,7 +27,7 @@ public static class ModelExtensions
             Content = message.Content,
             Timestamp = message.Timestamp,
             Attachments = attachmentDtos,
-            Emojis = message.Emojis
+            Emojis = emojis
         };
     }
     public static ChatRoomDto AsDto(this ChatRoom room)

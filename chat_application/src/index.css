@@ -927,3 +927,28 @@ form {
     min-width: 40px;
     -webkit-app-region: no-drag;
 }
+
+.add-emoji {
+    visibility: hidden;
+}
+.emoji-container:hover .add-emoji {
+    visibility: visible;
+}
+
+.emoji-container:hover + .add-emoji {
+    visibility: visible;
+}
+.emojiPiker-container {
+    position: absolute !important;
+    z-index: 1000;
+    
+}
+
+.emojiPiker-container-left-side {
+    position: absolute !important;
+    z-index: 1000;
+    top: -100px;
+    left: 40px;
+    right: 0px;
+    bottom: 0px;
+}

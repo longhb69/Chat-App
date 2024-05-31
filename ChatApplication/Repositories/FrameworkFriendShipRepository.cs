@@ -25,7 +25,8 @@ public class FrameworkFriendShipRepository : IFriendShipRepository
     {
         try
         {
-            bool friendExists = _dbContext.Friendships.Any(f => (f.user_id_1 == requesterId && f.user_id_2 == targetUserId) || (f.user_id_2 == requesterId && f.user_id_1 == targetUserId));
+            bool friendExists = _dbContext.Friendships.Any(f => (f.user_id_1 == requesterId && f.user_id_2 == targetUserId) 
+                                                                || (f.user_id_2 == requesterId && f.user_id_1 == targetUserId));
             if (!friendExists) 
             {
                 var friendship = new Friendships
@@ -48,7 +49,6 @@ public class FrameworkFriendShipRepository : IFriendShipRepository
     {
         var friendship = await _dbContext.Friendships.Where(f => (f.user_id_1 == requesterId && f.user_id_2 == targetUserId) || (f.user_id_2 == requesterId && f.user_id_1 == targetUserId))
                                             .FirstOrDefaultAsync();  //have to use Microsoft.EntityFrameworkCore
-        Console.WriteLine(friendship);
         if (friendship != null)
         {
             friendship.status = "accepted";
@@ -63,7 +63,7 @@ public class FrameworkFriendShipRepository : IFriendShipRepository
     public async Task<ICollection<UserDto>> GetFriendRequest(string targetUserId)
     {
         var friendship = await _dbContext.Friendships
-                                             .Where(f => f.user_id_2 == targetUserId)
+                                             .Where(f => f.user_id_2 == targetUserId && f.status == "pending")
                                              .Select(f => f.user_id_1)
                                              .ToListAsync(); 
         if(friendship != null)
@@ -85,5 +85,22 @@ public class FrameworkFriendShipRepository : IFriendShipRepository
                                 .Select(f => f.status)
                                 .FirstOrDefault();
         return friendship;
+    }
+
+    public async Task<ICollection<UserDto>> GetFriends(string targetUserId)
+    {
+        var friendship = await _dbContext.Friendships
+                                             .Where(f => (f.user_id_2 == targetUserId || f.user_id_1 == targetUserId) && f.status == "accepted")
+                                             .Select(f => f.user_id_1 != targetUserId ? f.user_id_1 : f.user_id_2)
+                                             .ToListAsync();
+        if (friendship != null)
+        {
+            var users = await _dbContext.Users
+                        .Where(u => friendship.Contains(u.Id))
+                        .Select(u => u.AsDto())
+                        .ToListAsync();
+            return users;
+        }
+        return null;
     }
 }

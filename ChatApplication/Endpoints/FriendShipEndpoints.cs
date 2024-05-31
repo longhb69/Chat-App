@@ -26,7 +26,7 @@ public static class FriendShipEndpoints
                 return Results.BadRequest();
             }
         });
-        endpoints.MapPost("api/friendship/acceptedRequest/{requesterId}/{targetUserId}", async (IFriendShipRepository friendShipRepository, string requesterId, string targetUserId) =>
+        endpoints.MapPut("api/friendship/acceptedRequest/{requesterId}/{targetUserId}", async (IFriendShipRepository friendShipRepository, string requesterId, string targetUserId) =>
         {
             try
             {
@@ -44,6 +44,15 @@ public static class FriendShipEndpoints
             if(status != null)
             {
                 return Results.Ok(status.Result);  
+            }
+            return Results.Ok();
+        });
+        endpoints.MapGet("api/getFriends/{targetUserId}", async (IFriendShipRepository friendShipRepository, string targetUserId) =>
+        {
+            var users = await friendShipRepository.GetFriends(targetUserId);  
+            if (users != null)
+            {
+                return Results.Ok(users);
             }
             return Results.Ok();
         });

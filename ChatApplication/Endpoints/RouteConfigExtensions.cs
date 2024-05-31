@@ -28,4 +28,8 @@ public static class RouteConfigExtensions
     {
         TestEndpoints.ConfigureRoutes(endpoints);
     }
+    public static void UseEmojiEndpoints(this IEndpointRouteBuilder endpoints)
+    {
+        EmojiEndpoints.ConfigureRoutes(endpoints);
+    }
 }

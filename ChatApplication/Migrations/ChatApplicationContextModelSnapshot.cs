@@ -95,30 +95,32 @@ namespace ChatApplication.Migrations
 
             modelBuilder.Entity("ChatApplication.Models.Emoji", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ChatMessageId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("EmojiSymbol")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long?>("MessageId")
+                    b.Property<long>("MessageId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("imageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MessageId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Emojis");
                 });
@@ -441,9 +443,21 @@ namespace ChatApplication.Migrations
 
             modelBuilder.Entity("ChatApplication.Models.Emoji", b =>
                 {
-                    b.HasOne("ChatApplication.Models.Message", null)
+                    b.HasOne("ChatApplication.Models.Message", "Message")
                         .WithMany("Emojis")
-                        .HasForeignKey("MessageId");
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ChatApplication.Models.User", "User")
+                        .WithMany("Emojis")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Message");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ChatApplication.Models.Friendships", b =>
@@ -573,6 +587,8 @@ namespace ChatApplication.Migrations
             modelBuilder.Entity("ChatApplication.Models.User", b =>
                 {
                     b.Navigation("ChatRooms");
+
+                    b.Navigation("Emojis");
 
                     b.Navigation("Friendships");
 

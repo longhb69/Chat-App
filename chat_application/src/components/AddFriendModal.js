@@ -126,16 +126,16 @@ export default function AddFriendModal() {
                         <Lottie className="w-[100px] h-[100px]" animationData={animationData} loop={true}/>
                     </div>
                 : 
-                    <ul className="flex flex-col px-[30px] py-[10px] gap-y-5">
+                    <ul className="flex flex-col px-[30px] py-[10px] gap-y-1">
                         {result && result.length > 0 ?
                             <>
                                 {result.map((user, index) => {
                                     if(user.id !== authInfo.userId) {
                                         return (
-                                            <li className="flex h-[50px] items-center ">
+                                            <li className="flex h-[50px] items-center hover:bg-[#E3E5E8] p-5 py-8 rounded-lg transition">
                                                 <div className="avatar online mr-[12px]">
                                                     <div className="w-[40px] h-[40px] rounded-full">
-                                                        <img className="w-full h-full overflow-hidden cursor-pointer select-none" src="https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp"/>
+                                                        <img className="w-full h-full overflow-hidden cursor-pointer select-none" src={user.avatarUrl ? `${user.avatarUrl}` : `https://chatapp-long-1.s3.ap-southeast-1.amazonaws.com/7f15142d4ff388f352cd.webp`}/>
                                                     </div>
                                                 </div>
                                                 <div className="font-medium mr-[100px] w-[100px] shrink-0 text-ellipsis">{user.userName}</div>

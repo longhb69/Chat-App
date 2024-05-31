@@ -119,11 +119,12 @@ public class EntityFrameworkMessageRepository : IMessageRepository
         {
             User user = await dbContext.Users.FindAsync(message.SenderId);
             List<Attachment> attachment = await dbContext.Attachments.Where(a => a.MessageId == message.Id).ToListAsync();
-            MessageDto test = message.AsDto(user, attachment);
+            List<Emoji> emojis = await dbContext.Emojis.Where(e => e.MessageId == message.Id).ToListAsync();
+            MessageDto test = message.AsDto(user, attachment, emojis);
             return new MessageResult
             {
                 StatusCode = StatusCodes.Status200OK,
-                MessageDto = message.AsDto(user, attachment)
+                MessageDto = message.AsDto(user, attachment, emojis)
             };
         }
     }
@@ -131,6 +132,7 @@ public class EntityFrameworkMessageRepository : IMessageRepository
     public async Task<MessageResult> GetMessagesForChatRoom(long chatRoomId ,int pageNumber, int pageSize)
     {
         var user = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name));
+       // var user = await _userManager.FindByNameAsync("long");
         string userId = string.Empty;
         if(user != null)
         {
@@ -160,13 +162,17 @@ public class EntityFrameworkMessageRepository : IMessageRepository
             Attachments = dbContext.Attachments
                 .Where(a => a.MessageId == m.Id)
                 .OrderBy(a => a.Id)
+                .ToList(),
+            Emoji = dbContext.Emojis
+                .Where(e => e.MessageId  == m.Id)
+                .OrderBy(e => e.Id)
                 .ToList()
          })
          .OrderBy(m =>m.Message.Timestamp)
          .AsNoTracking()
          .ToListAsync();
 
-        var results = messages.Select(m => m.Message.AsDto(m.User, m.Attachments)).ToList();
+        var results = messages.Select(m => m.Message.AsDto(m.User, m.Attachments, m.Emoji)).ToList();
         return new MessageResult
         {
 

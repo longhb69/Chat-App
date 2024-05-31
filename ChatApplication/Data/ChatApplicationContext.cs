@@ -83,6 +83,18 @@ public class ChatApplicationContext : IdentityDbContext<User>
                 .HasForeignKey(f => f.user_id_1)
                 .OnDelete(DeleteBehavior.Cascade);
         });
+        modelBuilder.Entity<Emoji>(entity =>
+        {
+            entity.HasOne(e => e.Message)
+                .WithMany(m  => m.Emojis)
+                .HasForeignKey(e => e.MessageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.User)
+                .WithMany(u => u.Emojis)
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
         base.OnModelCreating(modelBuilder);
     }

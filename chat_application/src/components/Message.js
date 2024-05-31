@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import embedRegexes from "../utils/embedRegexes ";
 import LinkRender from "./LinkRender";
 import AttachmentRender from "./AttachmentRender";
+import Emoji from "./Emoji";
+import EmojiPicker from "emoji-picker-react";
+import AddEmoji from "./AddEmoji";
 
 export default function Message({ message, premessage, idx }) {
     const today = new Date();
@@ -12,6 +15,7 @@ export default function Message({ message, premessage, idx }) {
     var prevmdate = premessage === null ? null : new Date(premessage.timestamp);
     const [link, setLink] = useState(false)
     const [type, setType] = useState('')
+    const [addEmoji, setAddEmoji] = useState(false)
 
     useEffect(() => {
         if (prevmdate !== null && !message.newmsg) {
@@ -78,6 +82,7 @@ export default function Message({ message, premessage, idx }) {
         }
         return formattedDate;
     };
+
     return (
         <>
             {isDayGap() || idx == 0 && (
@@ -87,10 +92,10 @@ export default function Message({ message, premessage, idx }) {
                     </span>
                 </div>
             )}
-            <li id={message.id}>
+            <li id={message.id} className="flex hover:bg-[#F7F7F7] relative">
                 {isTenMinuteGap() ? (
-                    <div className="message mt-0 relative min-h-[1.375rem] py-[1px] px-[70px] hover:bg-[#F7F7F7]">
-                        <div className="static ml-0 pl-0 indent-0">
+                    <div className="message mt-0 relative min-h-[1.375rem] py-1 px-[70px]">
+                        <div className="static ml-0 pl-0 indent-0 flex flex-col">
                             <span className="message-time absolute left-0 w-[56px] leading-5 h-[1.375rem] user-select-none text-right text-xs mr-1">
                                 <time>{formatTimestamp()}</time>
                             </span>
@@ -106,12 +111,16 @@ export default function Message({ message, premessage, idx }) {
                                 : null}
                             {message.attachments && message.attachments.length > 0
                                 ?
-                                <AttachmentRender attachments={message.attachments} />
+                                    <AttachmentRender attachments={message.attachments} />
+                                : null}
+                            {message.emojis && message.emojis.length > 0
+                                ? 
+                                    <Emoji emojis={message.emojis} messageId = {message.id}/>
                                 : null}
                         </div>
                     </div>
                 ) : (
-                    <div className="mt-4 min-h-[2.75rem] py-[1px] px-[70px] align-baseline hover:bg-[#F7F7F7]">
+                    <div className="mt-4 min-h-[2.75rem] py-[1px] px-[70px] align-baseline">
                         <div className="static">
                             {/* <img
                                 className="avatar w-[40px] h-[40px] absolute left-[16px] rounded-[50%] bg-[#5865F2] overflow-hidden cursor-pointer select-none"
@@ -151,10 +160,16 @@ export default function Message({ message, premessage, idx }) {
                                 ?
                                 <AttachmentRender attachments={message.attachments} />
                                 : null}
+                            {message.emojis && message.emojis.length > 0
+                                ? 
+                                 <div>Emoji</div>
+                                : null}
                         </div>
-
                     </div>
                 )}
+                {message.id === 66 ? 
+                    <AddEmoji messageId={message.id}/>
+                : null}
             </li>
         </>
     );

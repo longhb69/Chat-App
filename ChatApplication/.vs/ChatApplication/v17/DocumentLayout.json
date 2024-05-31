@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkfriendshiprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkfriendshiprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\endpoints\\emojiendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:endpoints\\emojiendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\endpoints\\friendshipendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:endpoints\\friendshipendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\models\\emoji.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:models\\emoji.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\endpoints\\messageendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:endpoints\\messageendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\ifriendshiprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\ifriendshiprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkchatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkchatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,59 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IFriendShipRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IFriendShipRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\IFriendShipRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IFriendShipRepository.cs",
-              "RelativeToolTip": "Repositories\\IFriendShipRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T06:19:02.317Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FrameworkUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkUserRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\FrameworkUserRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkUserRepository.cs",
-              "RelativeToolTip": "Repositories\\FrameworkUserRepository.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAowDIAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T06:10:53.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FrameworkFriendShipRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkFriendShipRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\FrameworkFriendShipRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkFriendShipRepository.cs",
-              "RelativeToolTip": "Repositories\\FrameworkFriendShipRepository.cs",
-              "ViewState": "AQIAADsAAAAAAAAAAAAwwE8AAABCAAAA",
+              "Title": "EmojiEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\EmojiEndpoints.cs",
+              "RelativeDocumentMoniker": "Endpoints\\EmojiEndpoints.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\EmojiEndpoints.cs",
+              "RelativeToolTip": "Endpoints\\EmojiEndpoints.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T05:30:34.151Z",
+              "WhenOpened": "2024-05-31T15:24:48.821Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FriendShipEndpoints.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\FriendShipEndpoints.cs",
-              "RelativeDocumentMoniker": "Endpoints\\FriendShipEndpoints.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\FriendShipEndpoints.cs",
-              "RelativeToolTip": "Endpoints\\FriendShipEndpoints.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAgwCgAAABKAAAA",
+              "Title": "Emoji.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\Emoji.cs",
+              "RelativeDocumentMoniker": "Models\\Emoji.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\Emoji.cs",
+              "RelativeToolTip": "Models\\Emoji.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T15:32:05.711Z",
+              "WhenOpened": "2024-05-27T14:36:52.246Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAADEAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T12:43:36.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MessageEndpoints.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\MessageEndpoints.cs",
+              "RelativeDocumentMoniker": "Endpoints\\MessageEndpoints.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\MessageEndpoints.cs",
+              "RelativeToolTip": "Endpoints\\MessageEndpoints.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T15:35:29.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrameworkChatRoomRepository.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkChatRoomRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\FrameworkChatRoomRepository.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkChatRoomRepository.cs",
+              "RelativeToolTip": "Repositories\\FrameworkChatRoomRepository.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T14:14:45.589Z"
             }
           ]
         }

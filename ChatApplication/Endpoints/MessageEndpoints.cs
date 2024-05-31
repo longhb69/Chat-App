@@ -11,7 +11,7 @@ public static class MessageEndpoints
             int actualPageSize = pageSize ??= 30;
             var result = await messageRepository.GetMessagesForChatRoom(chatroomId, actualPageNumber, actualPageSize);
 
-            if(result.StatusCode == StatusCodes.Status401Unauthorized)
+            if (result.StatusCode == StatusCodes.Status401Unauthorized)
             {
                 return Results.StatusCode(StatusCodes.Status401Unauthorized);
             }
