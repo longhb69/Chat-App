@@ -46,7 +46,7 @@ public class ChatHub : Hub
 
     public string GetConnectionId()
     {
-        return Context.ConnectionId;
+        return Context.ConnectionId;  //this will return the current connection id of client that call this function
     }
     public override async Task OnConnectedAsync()
     {
@@ -58,20 +58,28 @@ public class ChatHub : Hub
     }
     public override Task OnDisconnectedAsync(Exception? exception)
     {
+        Console.WriteLine("Disconnect");
         if (_shared.connections2.TryGetValue(Context.ConnectionId, out UserConnection2 conn))
         {
+            Console.WriteLine("User that disconnect " + conn.UserId + " : " + _shared.userConnectionMap[conn.UserId]);
             _shared.connections2.TryRemove(Context.ConnectionId, out _);
             _shared.userConnectionMap.TryRemove(conn.UserId, out _);
         }
         return base.OnDisconnectedAsync(exception);
+    }
+    public async Task LeaveRoom(long chatRoomId)
+    {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, "ChatRoom_" + chatRoomId);
+        Console.WriteLine("Leave room user: " + GetConnectionId());
     }
 
     private void LogConnectedUsers()
     {
         foreach (var connection in _shared.userConnectionMap)
         {
-            var userConnectionJson = JsonConvert.SerializeObject(connection);
-            _logger.LogInformation($"Connected User: {userConnectionJson}");
+            Console.WriteLine("***************");
+            Console.WriteLine("User: " + connection.Value);
+            Console.WriteLine("***************");
         }
     }
 
@@ -79,10 +87,12 @@ public class ChatHub : Hub
     {
         if(_shared.userConnectionMap.TryGetValue(userId, out var connectionId)) //return bool
         {
+            Console.WriteLine("Find user " + connectionId);
             return connectionId;
         }
         else
         {
+            Console.WriteLine("User Not Found");
             return null;
         }
     }
@@ -100,7 +110,7 @@ public async Task<long> SendMessage(string message)
                 Timestamp = DateTime.UtcNow,
             };
             messageId = await _messageRepository.Add(new_message);
-            await Clients.Group("ChatRoom_" + conn.ChatRoomId)
+            await Clients.GroupExcept("ChatRoom_" + conn.ChatRoomId, new[] {GetConnectionId()} )
                    .SendAsync("ReceiveMessage", messageId, user.UserDto.UserName, message, DateTime.UtcNow);
         }
         return messageId;
@@ -109,6 +119,13 @@ public async Task<long> SendMessage(string message)
     {
         await Clients.Group("ChatRoom_" + chatRoomId)
                        .SendAsync("ReceiveAttachment", messageId);
+    }
+
+    public async Task NotifyEmoji(long chatRoomId, long emojiId, long messageId)
+    {
+        Console.WriteLine("Notify Emoji expet " + GetConnectionId());
+        await Clients.GroupExcept("ChatRoom_" + chatRoomId, new[] { GetConnectionId() })
+                            .SendAsync("ReceiveEmoji", emojiId, messageId);
     }
 
     public async Task JoinChat(UserConnection conn) 
@@ -133,9 +150,6 @@ public async Task<long> SendMessage(string message)
         {
             _shared.connections2[Context.ConnectionId] = conn;
         }
-
-        await Clients.Group(groupName)
-            .SendAsync("ReceiveMessage", "admin", $"{user.UserDto.UserName} has joined {room.Name}");
         await SendConnectedUsers(room.Id);      
     }
 
@@ -154,5 +168,10 @@ public async Task<long> SendMessage(string message)
         var userAddedConnectionId = await GetConnectionIdByUserId(conn.UserId);
         _logger.LogInformation(userAddedConnectionId);
         await Clients.Client(userAddedConnectionId).SendAsync("AddedToChatRoom", conn.ChatRoomId);
+    }
+
+    public async Task GetAllUser()
+    {
+
     }
 }

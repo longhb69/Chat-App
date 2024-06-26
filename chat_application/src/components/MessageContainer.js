@@ -126,10 +126,26 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
     }, [])
 
     useEffect(() => {
-        bottomRef.current.scrollIntoView({
-            behavior: 'smooth'
-        })
-    }, [])
+        const container = messageRef.current
+
+        if(!container) return
+
+        const observer = new ResizeObserver((entries) => {
+            for(let entry of entries) {
+                if(entry.target === container) {
+                    //const height = entry.contentRect.height
+                    //console.log("Height change", height)
+                    bottomRef.current.scrollIntoView({
+                        behavior: 'smooth'
+                    })
+                }
+            }
+        }) 
+        observer.observe(messageRef.current)
+        return () => {
+            observer.disconnect()
+        }
+    }, [])  
 
     return (
         <div className="chat-1">
@@ -141,7 +157,7 @@ export default function MessageContainer({ messages, chatRoomId, setMessages, se
                                 {messages.length > 1 && !isEnd ? <LoadingMessage /> : null}
                                 {!isEnd ? <div ref={thresholdRef} className="h-[20px]"></div> : null } 
                                 {messagesWithPrevious.map(({ message, premessage }, idx) => (
-                                    <Message key={message.id} message={message} premessage={premessage} idx={idx}/>
+                                    <Message key={message.id} message={message} premessage={premessage} idx={idx} chatRoomId={chatRoomId} conn={conn}/>
                                 ))}
                                 <div ref={bottomRef}></div>
                                 <div className="h-[30px] w-[1px] pointer-events-none"></div>

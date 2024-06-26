@@ -15,6 +15,7 @@ import { usePage } from '../PageContext';
 import UserLayerContainer from '../components/UserLayerContainer';
 import SideBar from '../components/SideBar';
 import AccountRoom from './AccountRoom';
+import { Button } from 'react-bootstrap';
 
 export default function Home() {
     const [conn, setConnection] = useState();
@@ -48,6 +49,7 @@ export default function Home() {
                 // setConnection(conn);
                 // setAccountCon(true)
                 // navigate("/channels/me")
+                closeConnection()
                 if(id > 0) {
                     JoinSpecificChatRoom(authInfo.userId, Number(id))
                 }
@@ -58,8 +60,9 @@ export default function Home() {
         }
     }, [id])
 
-    const closeConnection = async () => {
+    const closeConnection = async (currentRoomId) => {
         try {
+            //conn.invoke("LeaveRoom", currentRoomId)
             await conn.stop();
         } catch (e) {
             console.log(e);
@@ -107,7 +110,29 @@ export default function Home() {
                 setUsers(users);
             })
 
+            conn.on("ReceiveEmoji", async (emojiId, messageId) => {
+                try {
+                    console.log("New Emoji")
+                    const emoji = await getEmoji(emojiId)
+                    console.log("New emoji", messageId, emoji)
+                    setMessages(prevMessages => {
+                        return prevMessages.map(message => {
+                            if(message.id === messageId) {
+                                console.log("Update emoji", message.id)
+                                const updateEmojis =  [...message.emojis, emoji] 
+                                console.log(updateEmojis)
+                                return {...message, emojis: updateEmojis}
+                            }
+                            return message
+                        })
+                    })  
+                } catch (e) {
+                    console.log("Error fetching emoji", e)
+                }
+            })
+
             conn.on("ReceiveMessage", (id, username, content, timestamp) => {
+                console.log("recieve message")
                 const newmsg = true
                 setMessages(messages => [...messages, { id,username, content, timestamp, newmsg }]);
             });
@@ -122,7 +147,6 @@ export default function Home() {
                     setMessages(prevMessages => {
                         return prevMessages.map(message => {
                             if(message.id === messageId) {
-                                console.log(response.data)
                                 return {...message, attachments: response.data.attachments}
                             }
                             return message
@@ -144,6 +168,11 @@ export default function Home() {
             //navigate("/channels/" + chatroomId )
             setCurrentRoomId(chatroomId);
             GetMessagesForChatRoom(chatroomId)
+
+            return () => {
+                conn.off("ReceiveEmoji");
+                conn.off("ReceiveMessage");
+            };
         } catch (e) {
             console.log(e)
         }
@@ -155,6 +184,15 @@ export default function Home() {
         }
         else {
             fetchMessages(chatroomId) //get just 30 page
+        }
+    }
+
+    const getEmoji = async (emojiId) => {
+        try {
+            const response = await axios.get(BaseUrl + `api/emoji/${emojiId}`)
+            return response.data
+        } catch (e) {
+            console.log(e)
         }
     }
 
@@ -209,6 +247,10 @@ export default function Home() {
         return Date.now() >= expirationTime; // Check if current time is greater than or equal to expiration time
     }
 
+    const leaveRoom = (chatroomId) => {
+        conn.invoke("LeaveRoom", chatroomId)
+    }
+
     return <div className='fullscreen'>
         <div className='layers'>
             <div aria-hidden={false} className={`relative overflow-hidden flex h-full w-full ${userSetting ? 'opacity-0' : ''}`}> {/*this layer can add child that handle user Nav */}
@@ -218,6 +260,11 @@ export default function Home() {
                         <>
                             <SideBar triggerUserSetting={setUserSetting}/>
                             <ChatRoom conn={conn} messages={messages} setMessages={setMessages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={"roomName"} currentRoomId={currentRoomId} triggerUserSetting={setUserSetting}/>
+                            <div>
+                                <Button variant="secondary" onClick={() => test(2)}>
+                                    Close
+                                </Button>
+                            </div>
                         </>
                     : null
                 }

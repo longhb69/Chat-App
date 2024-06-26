@@ -928,10 +928,13 @@ form {
     -webkit-app-region: no-drag;
 }
 
-.add-emoji {
+.add-emoji, .add-emoji2 {
     visibility: hidden;
 }
 .emoji-container:hover .add-emoji {
+    visibility: visible;
+}
+.message-container:hover .add-emoji2{
     visibility: visible;
 }
 
@@ -944,10 +947,19 @@ form {
     
 }
 
-.emojiPiker-container-left-side {
+.small-emojiPiker-container-right-side {
     position: absolute !important;
     z-index: 1000;
     top: -100px;
+    left: 40px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.large-emojiPiker-container-right-side {
+    position: absolute !important;
+    z-index: 1000;
+    top: -10px;
     left: 40px;
     right: 0px;
     bottom: 0px;

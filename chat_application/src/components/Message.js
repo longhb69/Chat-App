@@ -5,8 +5,10 @@ import AttachmentRender from "./AttachmentRender";
 import Emoji from "./Emoji";
 import EmojiPicker from "emoji-picker-react";
 import AddEmoji from "./AddEmoji";
+import { BaseUrl } from "../shared";
+import axios from "axios";
 
-export default function Message({ message, premessage, idx }) {
+export default function Message({ message, premessage, idx, chatRoomId, conn }) {
     const today = new Date();
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -83,6 +85,10 @@ export default function Message({ message, premessage, idx }) {
         return formattedDate;
     };
 
+    const AddNewEmoji =  (createdEmoji) => {
+        console.log(createdEmoji)
+    }
+ 
     return (
         <>
             {isDayGap() || idx == 0 && (
@@ -92,7 +98,7 @@ export default function Message({ message, premessage, idx }) {
                     </span>
                 </div>
             )}
-            <li id={message.id} className="flex hover:bg-[#F7F7F7] relative">
+            <li id={message.id} className="flex hover:bg-[#F7F7F7] relative message-container">
                 {isTenMinuteGap() ? (
                     <div className="message mt-0 relative min-h-[1.375rem] py-1 px-[70px]">
                         <div className="static ml-0 pl-0 indent-0 flex flex-col">
@@ -115,7 +121,7 @@ export default function Message({ message, premessage, idx }) {
                                 : null}
                             {message.emojis && message.emojis.length > 0
                                 ? 
-                                    <Emoji emojis={message.emojis} messageId = {message.id}/>
+                                    <Emoji emojis={message.emojis} messageId={message.id} chatRoomId={chatRoomId} conn={conn}/>
                                 : null}
                         </div>
                     </div>
@@ -162,14 +168,14 @@ export default function Message({ message, premessage, idx }) {
                                 : null}
                             {message.emojis && message.emojis.length > 0
                                 ? 
-                                 <div>Emoji</div>
+                                    <Emoji emojis={message.emojis} messageId={message.id} chatRoomId={chatRoomId} conn={conn}/>
                                 : null}
                         </div>
                     </div>
                 )}
-                {message.id === 66 ? 
-                    <AddEmoji messageId={message.id}/>
-                : null}
+                <div className="mt-2 add-emoji2">
+                    <AddEmoji messageId={message.id} height={25} width={25} position={'large-emojiPiker-container-right-side'} chatRoomId={chatRoomId} conn={conn} />
+                </div>
             </li>
         </>
     );

@@ -36,7 +36,7 @@ app.UseCors(builder =>
     builder.AllowAnyHeader()
            .AllowAnyMethod()
            .AllowCredentials()
-           .WithOrigins("http://192.168.1.8:3000"));
+           .WithOrigins("http://192.168.1.30:3000"));
 
 if (app.Environment.IsDevelopment())
 {
