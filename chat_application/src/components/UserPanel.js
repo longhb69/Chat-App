@@ -46,9 +46,9 @@ export default function RoomSideBarMeta({triggerUserSetting}) {
             getUserInfo()
         }
     }, [])
-
+    //#EBEDEF 
     return (
-        <section className="flex bg-[#EBEDEF] panels">
+        <section className="flex bg-[#FBE7C6] panels">
                 <div className="h-[52px] text-sm font-medium flex justify-between items-center px-[8px] relative w-full">
                     <div className="flex items-center min-w-[120px]">
                         {user ? 

@@ -134,6 +134,7 @@ export default function AttachmentRender({ attachments }) {
             case ".jpg":
             case ".jpeg":
             case ".webp":
+            case ".png":
                 return <AttachmentImage attachment={a} getThumbnail={getThumbnail} width={width} height={height} onClick={() => handleImageFocus(idx+offset)} />
             case ".mp4":
             case ".webm":

@@ -1,11 +1,11 @@
 import FriendIcon from "./FriendIcon"
 import UserPanel from "./UserPanel"
-
+//#F2F3F5  hover #D7D9DC
 export default function AccountSideBarMeta({triggerUserSetting}) {
     return (
         <>
             <UserPanel triggerUserSetting={triggerUserSetting}/>
-            <div className="bg-[#F2F3F5] scrollerBase fade">
+            <div className="bg-[#F4AA8B] scrollerBase fade"> 
                 <ul className="h-[496px] relative list-style-none">  
                     <li className="relative max-w-[224px] ml-[8px] block py-[1px] rounded"> 
                         <div className="pr-[8px] flex items-center w-full cursor-pointer hover:bg-[#D7D9DC]">

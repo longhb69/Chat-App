@@ -25,8 +25,8 @@ export default function Rooms({ conn, JoinSpecificChatRoom, GoToAccountChannel, 
     //         console.log("You just add to another chatroom");
     //     })
     // }, [conn]);
-
-    return <nav className="flex flex-col gap-2 items-center pt-3 pb-3 pl-3 pr-2 bg-[#E3E5E8] shrink-0">
+    //#E3E5E8
+    return <nav className="flex flex-col gap-2 items-center pt-3 pb-3 pl-3 pr-2 bg-gradient-to-t from-[#F4AA8B] to-[#F7CB78] shrink-0">
         <div className="relative flex items-center justify-center room-container">
             <div className={`${currentRoomId === -1 ? `active-bar-selected` : `active-bar`}`}></div>
             <Link

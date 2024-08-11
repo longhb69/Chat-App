@@ -3,52 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\iuserchatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\iuserchatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\istorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\istorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\is3client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\is3client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\ichatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\ichatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkthumbnailgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkthumbnailgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkfriendshiprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkfriendshiprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworks3clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworks3clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkstoragerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkstoragerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\entityframeworkmessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\entityframeworkmessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\models\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:models\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\endpoints\\emojiendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:endpoints\\emojiendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworks3clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworks3clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkchatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkchatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\entityframeworkmessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\entityframeworkmessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\frameworkthumbnailgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\frameworkthumbnailgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\data\\dataextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:data\\dataextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\imessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\imessagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\istorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\istorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|c:\\users\\thanh\\onedrive\\m\u00E1y t\u00EDnh\\.net\\chatapplication\\repositories\\ithumbnailgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7ACC0D7-8271-42E3-8E6F-B6D4A353AC61}|ChatApplication.csproj|solutionrelative:repositories\\ithumbnailgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -63,84 +55,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "IUserChatRoomRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IUserChatRoomRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\IUserChatRoomRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IUserChatRoomRepository.cs",
-              "RelativeToolTip": "Repositories\\IUserChatRoomRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:40.489Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-11T16:15:13.207Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IStorage.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IStorage.cs",
-              "RelativeDocumentMoniker": "Repositories\\IStorage.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IStorage.cs",
-              "RelativeToolTip": "Repositories\\IStorage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:39.499Z",
+              "WhenOpened": "2024-08-11T16:15:02.052Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IS3Client.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IS3Client.cs",
-              "RelativeDocumentMoniker": "Repositories\\IS3Client.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IS3Client.cs",
-              "RelativeToolTip": "Repositories\\IS3Client.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\ChatHub.cs",
+              "RelativeDocumentMoniker": "Models\\ChatHub.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\ChatHub.cs",
+              "RelativeToolTip": "Models\\ChatHub.cs",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAuwHIAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:38.307Z",
+              "WhenOpened": "2024-08-11T13:23:16.46Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "IChatRoomRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IChatRoomRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\IChatRoomRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IChatRoomRepository.cs",
-              "RelativeToolTip": "Repositories\\IChatRoomRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:34.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FrameworkThumbnailGenerator.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkThumbnailGenerator.cs",
-              "RelativeDocumentMoniker": "Repositories\\FrameworkThumbnailGenerator.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkThumbnailGenerator.cs",
-              "RelativeToolTip": "Repositories\\FrameworkThumbnailGenerator.cs",
-              "ViewState": "AQIAAHoAAAAAAAAAAAAwwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:25.316Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FrameworkFriendShipRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkFriendShipRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\FrameworkFriendShipRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkFriendShipRepository.cs",
-              "RelativeToolTip": "Repositories\\FrameworkFriendShipRepository.cs",
-              "ViewState": "AQIAAE0AAAAAAAAAAAAIwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:17.838Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "FrameworkS3ClientRepository.cs",
               "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkS3ClientRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FrameworkS3ClientRepository.cs",
@@ -148,71 +101,79 @@
               "RelativeToolTip": "Repositories\\FrameworkS3ClientRepository.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:24:09.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T18:02:28.991Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "FrameworkStorageRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkStorageRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\FrameworkStorageRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkStorageRepository.cs",
-              "RelativeToolTip": "Repositories\\FrameworkStorageRepository.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:23:47.029Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "EntityFrameworkMessageRepository.cs",
               "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\EntityFrameworkMessageRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\EntityFrameworkMessageRepository.cs",
               "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\EntityFrameworkMessageRepository.cs",
               "RelativeToolTip": "Repositories\\EntityFrameworkMessageRepository.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAowIEAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T06:35:50.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrameworkThumbnailGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkThumbnailGenerator.cs",
+              "RelativeDocumentMoniker": "Repositories\\FrameworkThumbnailGenerator.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkThumbnailGenerator.cs",
+              "RelativeToolTip": "Repositories\\FrameworkThumbnailGenerator.cs",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAgwHsAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T17:14:54.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Data\\DataExtensions.cs",
+              "RelativeDocumentMoniker": "Data\\DataExtensions.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Data\\DataExtensions.cs",
+              "RelativeToolTip": "Data\\DataExtensions.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T18:20:36.119Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IMessageRepository.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IMessageRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\IMessageRepository.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IMessageRepository.cs",
+              "RelativeToolTip": "Repositories\\IMessageRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T06:23:41.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T06:33:32.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IStorage.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IStorage.cs",
+              "RelativeDocumentMoniker": "Repositories\\IStorage.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IStorage.cs",
+              "RelativeToolTip": "Repositories\\IStorage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T06:33:14.553Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "ChatHub.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\ChatHub.cs",
-              "RelativeDocumentMoniker": "Models\\ChatHub.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Models\\ChatHub.cs",
-              "RelativeToolTip": "Models\\ChatHub.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAuwEUAAAAfAAAA",
+              "Title": "IThumbnailGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IThumbnailGenerator.cs",
+              "RelativeDocumentMoniker": "Repositories\\IThumbnailGenerator.cs",
+              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\IThumbnailGenerator.cs",
+              "RelativeToolTip": "Repositories\\IThumbnailGenerator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T13:55:52.112Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "FrameworkChatRoomRepository.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkChatRoomRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\FrameworkChatRoomRepository.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Repositories\\FrameworkChatRoomRepository.cs",
-              "RelativeToolTip": "Repositories\\FrameworkChatRoomRepository.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAwwCoAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-06T17:21:35.289Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "EmojiEndpoints.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\EmojiEndpoints.cs",
-              "RelativeDocumentMoniker": "Endpoints\\EmojiEndpoints.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\M\u00E1y t\u00EDnh\\.NET\\ChatApplication\\Endpoints\\EmojiEndpoints.cs",
-              "RelativeToolTip": "Endpoints\\EmojiEndpoints.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-31T15:24:48.821Z"
+              "WhenOpened": "2024-07-16T17:49:00.063Z"
             }
           ]
         }

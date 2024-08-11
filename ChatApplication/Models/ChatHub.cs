@@ -110,7 +110,8 @@ public async Task<long> SendMessage(string message)
                 Timestamp = DateTime.UtcNow,
             };
             messageId = await _messageRepository.Add(new_message);
-            await Clients.GroupExcept("ChatRoom_" + conn.ChatRoomId, new[] {GetConnectionId()} )
+            //GroupExcept("ChatRoom_" + conn.ChatRoomId, new[] {GetConnectionId()} ) send message to all user except sender
+            await Clients.Group("ChatRoom_" + conn.ChatRoomId)
                    .SendAsync("ReceiveMessage", messageId, user.UserDto.UserName, message, DateTime.UtcNow);
         }
         return messageId;

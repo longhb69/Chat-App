@@ -140,33 +140,44 @@ export function ModalProvider({ children }) {
             document.body.addEventListener('click', handleClickOutside);
             var newWidth;
             var newHeight;
+
             if (image.width) {
                 var resizeWidth = 0;
-                if (image.width <= 800) {
-                    resizeWidth = image.width
-                } else if (image.width <= 1280) {
-                    resizeWidth = Math.floor(image.width / 1.46)
-                } else  if(image.width > 1280) {
-                    resizeWidth = 1100
+                if(image.height > 619) {  //if to tall
+                    newHeight = 619
+                    const aspectRatio = image.width / image.height;
+                    newWidth = Math.floor(newHeight * aspectRatio);
+                    setHeight(newHeight)
+                    setWidth(newWidth)
                 } else {
-                    resizeWidth = Math.floor(image.width / 2.2)
+                    if (image.width <= 800) { 
+                        resizeWidth = image.width
+                    } else if (image.width <= 1280) {
+                        resizeWidth = Math.floor(image.width / 1.46)
+                    } else  if(image.width > 1280) {  //if width to much
+                        resizeWidth = 1100
+                    } else {
+                        resizeWidth = Math.floor(image.width / 2.2)
+                    }
+                    const divisor = image.width / resizeWidth;
+                    const resizeHeight = parseInt(Math.round(image.height / divisor));
+                    newWidth = resizeWidth
+                    setWidth(resizeWidth)
+                    newHeight = resizeHeight;
+                    setHeight(resizeHeight)
                 }
-                const divisor = image.width / resizeWidth;
-                const resizeHeight = parseInt(Math.round(image.height / divisor));
-                newWidth = resizeWidth
-                setWidth(resizeWidth)
-                newHeight = resizeHeight;
-                setHeight(resizeHeight)
             }
             else {
                 setWidth(newWidth = 1000)
                 newHeight = 500;
                 setHeight(500)
             }
+
             setUrl(BaseUrl + `api/FileUpload/attachment/download?fileName=${image.contentName}&width=${newWidth}&height=${newHeight}`)
             setTimeout(function () {
                 if (loadingRef.current) loadingRef.current.classList.add('loading-image')
             }, 3000)
+
             return () => {
                 setCarouselSecondItem(false)
                 document.body.removeEventListener('click', handleClickOutside);

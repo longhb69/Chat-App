@@ -3,8 +3,9 @@
     "",
     "\\Controllers",
     "\\Dtos",
-    "\\Endpoints"
+    "\\Endpoints",
+    "\\Models"
   ],
-  "SelectedNode": "\\Controllers\\FileUploadController.cs",
+  "SelectedNode": "\\Models\\User.cs",
   "PreviewInSolutionExplorer": false
 }

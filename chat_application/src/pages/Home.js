@@ -260,11 +260,11 @@ export default function Home() {
                         <>
                             <SideBar triggerUserSetting={setUserSetting}/>
                             <ChatRoom conn={conn} messages={messages} setMessages={setMessages} sendMessage={sendMessage} closeConnection={closeConnection} users={users} roomName={"roomName"} currentRoomId={currentRoomId} triggerUserSetting={setUserSetting}/>
-                            <div>
+                            {/* <div>
                                 <Button variant="secondary" onClick={() => test(2)}>
                                     Close
                                 </Button>
-                            </div>
+                            </div> */}
                         </>
                     : null
                 }

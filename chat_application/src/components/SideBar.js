@@ -1,3 +1,4 @@
+import { useTheme } from "../context/ColorContext"
 import AccountSideBarMeta from "./AccountSideBarMeta"
 import RoomSideBarMeta from "./RoomSideBarMeta"
 
@@ -15,8 +16,11 @@ export default function SideBar({triggerUserSetting, account}) {
         }
     }
 
+    const {getSideBarTheme} = useTheme()
+    
+    //#F2F3F5
     return (
-        <div className="sidebar bg-[#F2F3F5] z-[1]">
+        <div className={`sidebar ${getSideBarTheme()} z-[1]`}>
             {getSideBarComponent()}
         </div>
     )
